@@ -210,7 +210,7 @@ public class DriveSubsystem {
     }
 
     public void setPower(double forward, double strafe, double turn, double reductionFactor) {
-        float originalDenominator = calculateDenominator(forward/reductionFactor, strafe/reductionFactor, turn/reductionFactor);
+        double originalDenominator = calculateDenominator(forward/reductionFactor, strafe/reductionFactor, turn/reductionFactor);
 
         double adjustedDenominator = originalDenominator * reductionFactor;
         double frontLeftPower = (forward + strafe + turn) / adjustedDenominator;
