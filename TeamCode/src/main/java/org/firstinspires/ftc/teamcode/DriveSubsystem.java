@@ -95,7 +95,7 @@ public class DriveSubsystem {
     public DriveSubsystem(HardwareMap hm, Telemetry telemetry) {
         this.hardwareMap = hm;
         this.telemetry = telemetry;
-        this.init(hm);
+        this.init();
         countsPerMotorRev = frontLeftMotor.getMotorType().getTicksPerRev();
         driveGearReduction = frontLeftMotor.getMotorType().getGearing();
         countsPerInch = (countsPerMotorRev * driveGearReduction) /
@@ -107,10 +107,8 @@ public class DriveSubsystem {
      * <p>
      * All of the hardware devices are accessed via the hardware map, and initialized.
      */
-    protected void init(HardwareMap hm) {
+    protected void init() {
         setupIMU();
-
-        this.hardwareMap = hm;
 
         assignMotors();
 
@@ -169,20 +167,17 @@ public class DriveSubsystem {
     }
 
     public void moveRobotCentric(float forward, float strafe, float turn, float reductionFactor) {
-            float originalDenominator = calculateDenominator(forward / reductionFactor, strafe / reductionFactor, turn / reductionFactor);
+        double originalDenominator = calculateDenominator(forward / reductionFactor, strafe / reductionFactor, turn / reductionFactor);
 
-            float adjustedDenominator = originalDenominator * reductionFactor;
-            float frontLeftPower = (forward + strafe + turn) / adjustedDenominator;
-            float backLeftPower = (forward - strafe + turn) / adjustedDenominator;
-            float frontRightPower = (forward - strafe - turn) / adjustedDenominator;
-            float backRightPower = (forward + strafe - turn) / adjustedDenominator;
+        double adjustedDenominator = originalDenominator * reductionFactor;
+        double frontLeftPower = (forward + strafe + turn) / adjustedDenominator;
+        double backLeftPower = (forward - strafe + turn) / adjustedDenominator;
+        double frontRightPower = (forward - strafe - turn) / adjustedDenominator;
+        double backRightPower = (forward + strafe - turn) / adjustedDenominator;
 
-            frontLeftMotor.setPower(frontLeftPower);
-            backLeftMotor.setPower(backLeftPower);
-            frontRightMotor.setPower(frontRightPower);
-            backRightMotor.setPower(backRightPower);
+        setMotorPower(frontLeftPower, backLeftPower, frontRightPower, backRightPower);
 
-            telemetry.addData("Forward", forward);
+        telemetry.addData("Forward", forward);
             telemetry.addData("Strafe", strafe);
             telemetry.addData("Turn", turn);
             telemetry.addData("Reduction Factor", reductionFactor);
@@ -210,21 +205,20 @@ public class DriveSubsystem {
         double backLeftPower = (rotY - rotX + rx) / denominator;
         double frontRightPower = (rotY - rotX - rx) / denominator;
         double backRightPower = (rotY + rotX - rx) / denominator;
+
+        setMotorPower(frontLeftPower, backLeftPower, frontRightPower, backRightPower);
     }
 
-    public void setPower(float forward, float strafe, float turn, float reductionFactor) {
+    public void setPower(double forward, double strafe, double turn, double reductionFactor) {
         float originalDenominator = calculateDenominator(forward/reductionFactor, strafe/reductionFactor, turn/reductionFactor);
 
-        float adjustedDenominator = originalDenominator * reductionFactor;
-        float frontLeftPower = (forward + strafe + turn) / adjustedDenominator;
-        float backLeftPower = (forward - strafe + turn) / adjustedDenominator;
-        float frontRightPower = (forward - strafe - turn) / adjustedDenominator;
-        float backRightPower = (forward + strafe - turn) / adjustedDenominator;
+        double adjustedDenominator = originalDenominator * reductionFactor;
+        double frontLeftPower = (forward + strafe + turn) / adjustedDenominator;
+        double backLeftPower = (forward - strafe + turn) / adjustedDenominator;
+        double frontRightPower = (forward - strafe - turn) / adjustedDenominator;
+        double backRightPower = (forward + strafe - turn) / adjustedDenominator;
 
-        frontLeftMotor.setPower(frontLeftPower);
-        backLeftMotor.setPower(backLeftPower);
-        frontRightMotor.setPower(frontRightPower);
-        backRightMotor.setPower(backRightPower);
+        setMotorPower(frontLeftPower, backLeftPower, frontRightPower, backRightPower);
 
         telemetry.addData("Forward", forward);
         telemetry.addData("Strafe", strafe);
@@ -236,8 +230,15 @@ public class DriveSubsystem {
         telemetry.addData("Back Right Power", backRightPower);
     }
 
-    private float calculateDenominator(float forward, float strafe, float turn) {
-        float sum = Math.abs(forward) + Math.abs(strafe) + Math.abs(turn);
+    private void setMotorPower(double frontLeftPower, double backLeftPower, double frontRightPower, double backRightPower) {
+        frontLeftMotor.setPower(frontLeftPower);
+        backLeftMotor.setPower(backLeftPower);
+        frontRightMotor.setPower(frontRightPower);
+        backRightMotor.setPower(backRightPower);
+    }
+
+    private double calculateDenominator(double forward, double strafe, double turn) {
+        double sum = Math.abs(forward) + Math.abs(strafe) + Math.abs(turn);
         if (sum > 1) {
             return sum;
         }
