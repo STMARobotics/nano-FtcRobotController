@@ -54,8 +54,8 @@ public class DriveOnlyOpMode extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    DriveSubsystem driveSubsystem;
-//    SlideSubsystem slideSubsystem;
+//    DriveSubsystem driveSubsystem;
+    SlideSubsystem slideSubsystem;
 //    ArmSubsystem arm;
 //    WristSubsystem wrist;
 
@@ -64,7 +64,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
         DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-//        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
+        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
 //        arm = new ArmSubsystem(hardwareMap, telemetry);
 //        wrist = new WristSubsystem(hardwareMap, telemetry);
         // Wait for the game to start (driver presses START)
@@ -83,15 +83,17 @@ public class DriveOnlyOpMode extends LinearOpMode {
                 reductionFactor = 4;
             }
 
-            // Move Slide to positions
-//            if (gamepad2.dpad_up){
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-//            } else if (gamepad2.dpad_down) {
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
-//            }
+             //Move Slide to positions
+            if (gamepad1.dpad_up){
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
+            } else if (gamepad1.dpad_down) {
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
+            }
 
-            // Handles move arm to set positions with a fudge fa ctor
-//            double fudgeFactorPercentage = gamepad2.right_trigger + (-gamepad2.left_trigger);
+             //Handles move arm to set positions with a fudge factor
+//
+//            Not working but needs to be set to different spot since this may be used
+//            double fudgeFactorPercentage = gamepad1.right_trigger + (-gamepad1.left_trigger);
 //            if (gamepad1.a){
 //                arm.moveToArmToCollectPosition(fudgeFactorPercentage);
 //            } else if (gamepad1.b){
@@ -99,12 +101,11 @@ public class DriveOnlyOpMode extends LinearOpMode {
 //            } else if (gamepad1.x){
 //                arm.moveArmToScoreSampleInLowPosition(fudgeFactorPercentage);
 //            } else if (gamepad1.dpad_left){
-//                arm.moveArmToCollapsedIntoRobotPosition(fudgeFactorPercentage);
+//               arm.moveArmToCollapsedIntoRobotPosition(fudgeFactorPercentage);
 //            } else if (gamepad1.dpad_right) {
 //                arm.moveArmToScoreSpecimenPosition(fudgeFactorPercentage);
 //            } else if (gamepad1.dpad_up){
-//                arm.moveArmToAttachHangingHookPosition(fudgeFactorPercentage);
-//            } else if (gamepad1.dpad_down){
+//                arm.moveArmToAttachHangingHookPosition(fudgeFactorPercentage);} else if (gamepad1.dpad_down){
 //                arm.moveArmToWinchRobotPosition(fudgeFactorPercentage);
 //            }
 
@@ -114,7 +115,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
 //                wrist.moveToPosition(0);
 //            }
 
-            driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
+//            driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

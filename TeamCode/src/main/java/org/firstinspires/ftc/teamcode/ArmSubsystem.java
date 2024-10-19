@@ -13,20 +13,17 @@ public class ArmSubsystem {
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
-    public static final String ARM_MOTOR = "arm_motor";
+    public static final String ARM_MOTOR = "arm-motor";
 
-    final double ARM_TICKS_PER_DEGREE =
-            28 // number of encoder ticks per rotation of the bare motor
-                    * 250047.0 / 4913.0 // This is the exact gear ratio of the 50.9:1 Yellow Jacket gearbox
-                    * 100.0 / 20.0 // This is the external gear reduction, a 20T pinion gear that drives a 100T hub-mount gear
-                    * 1/360.0; // we want ticks per degree, not per rotation
+    final double ARM_TICKS_PER_DEGREE = 18;
     final double ARM_COLLAPSED_INTO_ROBOT = 0;
     final double ARM_COLLECT              = 15 * ARM_TICKS_PER_DEGREE;
     final double ARM_CLEAR_BARRIER        = 15 * ARM_TICKS_PER_DEGREE;
-    final double ARM_SCORE_SPECIMEN       = 90 * ARM_TICKS_PER_DEGREE;
-    final double ARM_SCORE_SAMPLE_IN_LOW  = 90 * ARM_TICKS_PER_DEGREE;
-    final double ARM_ATTACH_HANGING_HOOK  = 110 * ARM_TICKS_PER_DEGREE;
+    final double ARM_SCORE_SPECIMEN       = 50 * ARM_TICKS_PER_DEGREE;
+    final double ARM_SCORE_SAMPLE_IN_LOW  = 50 * ARM_TICKS_PER_DEGREE;
+    final double ARM_ATTACH_HANGING_HOOK  = 90 * ARM_TICKS_PER_DEGREE;
     final double ARM_WINCH_ROBOT          = 10  * ARM_TICKS_PER_DEGREE;
+    final double MAX_POSITION = 90 * ARM_TICKS_PER_DEGREE;
 
     static double FUDGE_FACTOR_DEGREES = 15;
 
