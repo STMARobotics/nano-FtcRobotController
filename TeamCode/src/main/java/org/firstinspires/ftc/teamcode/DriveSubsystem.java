@@ -74,10 +74,10 @@ public class DriveSubsystem {
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
-    public static final String FRONT_LEFT_MOTOR = "front_left_motor";
-    public static final String FRONT_RIGHT_MOTOR = "front_right_motor";
-    public static final String BACK_LEFT_MOTOR = "back_left_motor";
-    public static final String BACK_RIGHT_MOTOR = "back_right_motor";
+    public static final String FRONT_LEFT_MOTOR = "front-left-motor";
+    public static final String FRONT_RIGHT_MOTOR = "front-right-motor";
+    public static final String BACK_LEFT_MOTOR = "back-left-motor";
+    public static final String BACK_RIGHT_MOTOR = "back-right-motor";
 
     private double countsPerMotorRev;
     private double countsPerInch;
