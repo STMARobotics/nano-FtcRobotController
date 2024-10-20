@@ -54,8 +54,8 @@ public class DriveOnlyOpMode extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-//    DriveSubsystem driveSubsystem;
-    SlideSubsystem slideSubsystem;
+    DriveSubsystem driveSubsystem;
+//    SlideSubsystem slideSubsystem;
 //    ArmSubsystem arm;
 //    WristSubsystem wrist;
 
@@ -64,7 +64,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
         DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
+//        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
 //        arm = new ArmSubsystem(hardwareMap, telemetry);
 //        wrist = new WristSubsystem(hardwareMap, telemetry);
         // Wait for the game to start (driver presses START)
@@ -84,11 +84,11 @@ public class DriveOnlyOpMode extends LinearOpMode {
             }
 
              //Move Slide to positions
-            if (gamepad1.dpad_up){
-                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-            } else if (gamepad1.dpad_down) {
-                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
-            }
+//            if (gamepad1.dpad_up){
+//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
+//            } else if (gamepad1.dpad_down) {
+//                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
+//            }
 
              //Handles move arm to set positions with a fudge factor
 //
@@ -115,7 +115,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
 //                wrist.moveToPosition(0);
 //            }
 
-//            driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
+            driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
