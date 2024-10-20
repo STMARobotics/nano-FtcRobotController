@@ -10,13 +10,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class SlideSubsystem {
 
     private DcMotor slideMotor;
-    public static final String SLIDE_MOTOR="slide-motor";
+    public static final String SLIDE_MOTOR="front-right-motor";
 
-    public static final double LIFT_TICKS_PER_MM = (111132.0 / 289.0) / 120.0;
+    public static final double LIFT_TICKS_PER_INCH = 120;
 
-    public static final double LIFT_COLLAPSED = 0 * LIFT_TICKS_PER_MM;
-    public static final double LIFT_SCORING_IN_LOW_BASKET = 0 * LIFT_TICKS_PER_MM;
-    public static final double LIFT_SCORING_IN_HIGH_BASKET = 480 * LIFT_TICKS_PER_MM;
+    public static final double LIFT_COLLAPSED = 0 * LIFT_TICKS_PER_INCH;
+    public static final double LIFT_SCORING_IN_LOW_BASKET = 0 * LIFT_TICKS_PER_INCH;
+    public static final double LIFT_SCORING_IN_HIGH_BASKET = 12 * LIFT_TICKS_PER_INCH;
 
     double liftPosition = LIFT_COLLAPSED;
 
