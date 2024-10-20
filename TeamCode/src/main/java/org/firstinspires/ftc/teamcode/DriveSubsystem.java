@@ -79,11 +79,10 @@ public class DriveSubsystem {
     public static final String BACK_LEFT_MOTOR = "back-left-motor";
     public static final String BACK_RIGHT_MOTOR = "back-right-motor";
 
-    private double countsPerMotorRev;
-    private double countsPerInch;
-    private double driveGearReduction;     // No External Gearing.
+    private final double countsPerInch = 40;
+    private final double degreeTicks = 10.5;
+    private final double strafeTicksPerInch = 70;
 
-    final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     private BooleanSupplier isActiveOpMode;
     private int newFrontRightTarget;
     private int newFrontLeftTarget;
@@ -96,10 +95,6 @@ public class DriveSubsystem {
         this.hardwareMap = hm;
         this.telemetry = telemetry;
         this.init(hm);
-        countsPerMotorRev = frontLeftMotor.getMotorType().getTicksPerRev();
-        driveGearReduction = frontLeftMotor.getMotorType().getGearing();
-        countsPerInch = (countsPerMotorRev * driveGearReduction) /
-                (WHEEL_DIAMETER_INCHES * 3.1415);
     }
     /**
      * Initialize all the robot's hardware.
@@ -263,43 +258,74 @@ public class DriveSubsystem {
     }
 
     public void driveForward(double speed, double inches) {
-
-        newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) (inches * countsPerInch);
-        newFrontLeftTarget = frontLeftMotor.getCurrentPosition() + (int) (inches * countsPerInch);
-        newBackRightTarget = backRightMotor.getCurrentPosition() + (int) (inches * countsPerInch);
-        newBackLeftTarget = backLeftMotor.getCurrentPosition() + (int) (inches * countsPerInch);
+        System.out.println("******************** FORWARD ****************");
+        newFrontRightTarget = frontRightMotor.getCurrentPosition() - (int) (inches * countsPerInch);
+        newFrontLeftTarget = frontLeftMotor.getCurrentPosition() - (int) (inches * countsPerInch);
+        newBackRightTarget = backRightMotor.getCurrentPosition() - (int) (inches * countsPerInch);
+        newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (inches * countsPerInch);
 
         frontRightMotor.setTargetPosition(newFrontRightTarget);
         frontLeftMotor.setTargetPosition(newFrontLeftTarget);
         backLeftMotor.setTargetPosition(newBackLeftTarget);
         backRightMotor.setTargetPosition(newBackRightTarget);
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        frontRightMotor.setPower(Math.abs(speed));
+        frontLeftMotor.setPower(Math.abs(speed));
+        backLeftMotor.setPower(Math.abs(speed));
+        backRightMotor.setPower(Math.abs(speed));
+
     }
 
     public void strafeLeft(double speed, double inches) {
 
-        int newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) (inches * countsPerInch);
-        int newFrontLeftTarget = frontLeftMotor.getCurrentPosition() + (int) (inches * countsPerInch);
-        int newBackRightTarget = backRightMotor.getCurrentPosition() - (int) (inches * countsPerInch);
-        int newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (inches * countsPerInch);
+        int newFrontRightTarget = frontRightMotor.getCurrentPosition() - (int) (inches * strafeTicksPerInch);
+        int newFrontLeftTarget = frontLeftMotor.getCurrentPosition() + (int) (inches * strafeTicksPerInch);
+        int newBackRightTarget = backRightMotor.getCurrentPosition() + (int) (inches * strafeTicksPerInch);
+        int newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (inches * strafeTicksPerInch);
 
         frontRightMotor.setTargetPosition(newFrontRightTarget);
         frontLeftMotor.setTargetPosition(newFrontLeftTarget);
         backLeftMotor.setTargetPosition(newBackLeftTarget);
         backRightMotor.setTargetPosition(newBackRightTarget);
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRightMotor.setPower(Math.abs(speed));
+        frontLeftMotor.setPower(Math.abs(speed));
+        backLeftMotor.setPower(Math.abs(speed));
+        backRightMotor.setPower(Math.abs(speed));
     }
 
     public void turnLeft(double speed, double degrees) {
 
-        int newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) (degrees * countsPerInch);
-        int newFrontLeftTarget = frontLeftMotor.getCurrentPosition() - (int) (degrees * countsPerInch);
-        int newBackRightTarget = backRightMotor.getCurrentPosition() + (int) (degrees * countsPerInch);
-        int newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (degrees * countsPerInch);
+        int newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) (degrees * degreeTicks);
+        int newFrontLeftTarget = frontLeftMotor.getCurrentPosition() - (int) (degrees * degreeTicks);
+        int newBackRightTarget = backRightMotor.getCurrentPosition() + (int) (degrees * degreeTicks);
+        int newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (degrees * degreeTicks);
 
         frontRightMotor.setTargetPosition(newFrontRightTarget);
         frontLeftMotor.setTargetPosition(newFrontLeftTarget);
         backLeftMotor.setTargetPosition(newBackLeftTarget);
         backRightMotor.setTargetPosition(newBackRightTarget);
 
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRightMotor.setPower(Math.abs(speed));
+        frontLeftMotor.setPower(Math.abs(speed));
+        backLeftMotor.setPower(Math.abs(speed));
+        backRightMotor.setPower(Math.abs(speed));
     }
 
     public boolean isMoving() {

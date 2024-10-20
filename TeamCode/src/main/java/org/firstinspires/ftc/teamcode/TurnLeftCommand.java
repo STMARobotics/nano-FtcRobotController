@@ -7,6 +7,7 @@ public class TurnLeftCommand extends DriveCommand{
     private final double degrees;
 
     public TurnLeftCommand(DriveSubsystem driveSystem, double degrees, int timeout) {
+        this.speed = .5;
         this.driveSystem = driveSystem;
         this.degrees = degrees;
         this.timeout = timeout;

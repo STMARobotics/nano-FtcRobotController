@@ -22,6 +22,7 @@ public class CommandRunner {
     }
 
     public void run (){
+        System.out.println("**********************  RUNNING  *****************");
         for (Command command : commands) {
             command.init();
             command.execute();

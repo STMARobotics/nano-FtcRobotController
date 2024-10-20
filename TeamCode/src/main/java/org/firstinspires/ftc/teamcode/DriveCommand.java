@@ -16,6 +16,7 @@ public abstract class DriveCommand implements Command{
 
     @Override
     public void onComplete() {
+        System.out.println("*****************  COMPLETE ************");
         driveSystem.shutOffMotors();
     }
 

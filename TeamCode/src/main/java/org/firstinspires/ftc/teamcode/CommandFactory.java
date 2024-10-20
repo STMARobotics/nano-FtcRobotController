@@ -36,4 +36,8 @@ public class CommandFactory {
     public static Command TurnRight(double degrees, int timeout){
         return new TurnLeftCommand(commandFactory.driveSubsystem, -degrees, timeout);
     }
+
+    public static Command Pause(double seconds){
+        return new PauseCommand(seconds);
+    }
 }
