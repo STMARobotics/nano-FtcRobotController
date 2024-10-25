@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class SlideSubsystem {
 
     private DcMotor slideMotor;
-    public static final String SLIDE_MOTOR="slide-motor";
+    public static final String SLIDE_MOTOR="slideMotor";
 
     public static final double LIFT_TICKS_PER_INCH = 120;
 
