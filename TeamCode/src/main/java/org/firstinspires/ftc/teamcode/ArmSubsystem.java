@@ -20,7 +20,7 @@ public class ArmSubsystem {
 
     final double ARM_TOP = 90 * ARM_TICKS_PER_DEGREE;
     final double ARM_BOTTOM = 0 * ARM_TICKS_PER_DEGREE;
-    final double ARM_PARALLEL = 50 * ARM_TICKS_PER_DEGREE;
+    final double ARM_PARALLEL = 40 * ARM_TICKS_PER_DEGREE;
     final double ARM_PICKUP = 15* ARM_TICKS_PER_DEGREE;
     final double MAX_POSITION = 90 * ARM_TICKS_PER_DEGREE;
 

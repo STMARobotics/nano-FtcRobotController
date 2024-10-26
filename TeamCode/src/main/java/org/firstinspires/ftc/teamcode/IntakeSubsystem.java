@@ -15,31 +15,30 @@ public class IntakeSubsystem {
 
     public static final double SERVO_SPEED = 0.5;
 
-    private CRServo servo;
+    private Servo servo;
 
     public IntakeSubsystem(HardwareMap hm, Telemetry telemetry){
         this.hardwareMap = hm;
         this.telemetry = telemetry;
 
-        servo = hardwareMap.get(CRServo.class, INTAKE_SERVO);
+        servo = hardwareMap.get(Servo.class, INTAKE_SERVO);
     }
 
     public void spinForward(){
-        servo.setDirection(DcMotorSimple.Direction.FORWARD);
-        servo.setPower(SERVO_SPEED);
+        servo.setDirection(Servo.Direction.FORWARD);
+        servo.setPosition(.75);
     }
 
     public void  spinBackward(){
-        servo.setDirection(DcMotorSimple.Direction.REVERSE);
-        servo.setPower(SERVO_SPEED);
+        servo.setPosition(-.75);
     }
 
     public void stop(){
-        servo.setPower(0);
+        servo.setPosition(0);
     }
 
     public void addTelemetry() {
         telemetry.addData("intake direction", servo.getDirection());
-        telemetry.addData("intake power", servo.getPower());
+        telemetry.addData("intake power", servo.getPosition());
     }
 }
