@@ -38,4 +38,8 @@ public class IntakeSubsystem {
         servo.setPower(0);
     }
 
+    public void addTelemetry() {
+        telemetry.addData("intake direction", servo.getDirection());
+        telemetry.addData("intake power", servo.getPower());
+    }
 }

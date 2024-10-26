@@ -23,4 +23,8 @@ public class WristSubsystem {
     public void moveToPosition(double position){
         servo.setPosition(position);
     }
+
+    public void addTelemetry() {
+        telemetry.addData("wrist position", servo.getPosition());
+    }
 }
