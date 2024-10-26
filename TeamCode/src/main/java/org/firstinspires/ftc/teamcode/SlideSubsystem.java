@@ -49,6 +49,7 @@ public class SlideSubsystem {
 
     public void addTelemetry(){
         telemetry.addData("slide position",slideMotor.getCurrentPosition());
+        telemetry.addData("slide target position", slideMotor.getTargetPosition());
         telemetry.addData("slide busy", slideMotor.isBusy());
     }
 }
