@@ -88,16 +88,18 @@ public class DriveOnlyOpMode extends LinearOpMode {
 
 
              //Move Slide to positions
-            if (gamepad2.dpad_up){
+            if (gamepad1.dpad_up){
                 slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-            } else if (gamepad2.dpad_down) {
+            } else if (gamepad1.dpad_down) {
                 slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
+            } else if (gamepad1.dpad_left){
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_SHORT_REACH);
             }
 
              //Handles move arm to set positions with a fudge factor
 //
 //            Not working but needs to be set to different spot since this may be used
-            double fudgeFactorPercentage = gamepad2.right_trigger + (gamepad2.left_trigger);
+            double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
             if (gamepad2.a){
                 arm.moveToBottom(fudgeFactorPercentage);
             } else if (gamepad2.b){
@@ -114,7 +116,9 @@ public class DriveOnlyOpMode extends LinearOpMode {
                 wrist.moveToPosition(.75);
             } else if (gamepad2.right_bumper){
                 wrist.moveToPosition(0);
-            }
+            } else {
+               wrist.moveToPosition(.35);
+           }
 
             if (gamepad2.dpad_left){
                intake.spinForward();
