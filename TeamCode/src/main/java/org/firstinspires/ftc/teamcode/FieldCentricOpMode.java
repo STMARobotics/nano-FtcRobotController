@@ -31,7 +31,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -48,9 +47,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Drive Only OpMode", group="Linear OpMode")
+@TeleOp(name="Field Centric OpMode", group="Linear OpMode")
 //@Disabled
-public class DriveOnlyOpMode extends LinearOpMode {
+public class FieldCentricOpMode extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -76,16 +75,14 @@ public class DriveOnlyOpMode extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            float forward = - gamepad1.left_stick_y;
-            float strafe = gamepad1.left_stick_x;
+            float forward = gamepad1.left_stick_y;
+            float strafe = - gamepad1.left_stick_x;
             float turn = gamepad1.right_stick_x;
 
             float reductionFactor = 2;
             if (gamepad1.right_bumper) {
                 reductionFactor = 6;
             }
-
-
 
              //Move Slide to positions
             if (gamepad2.dpad_up){
@@ -106,13 +103,13 @@ public class DriveOnlyOpMode extends LinearOpMode {
                 arm.moveToTop(fudgeFactorPercentage);
             } else if (gamepad2.x){
                arm.moveToPickUpSpecimen(fudgeFactorPercentage);
-            } else if (gamepad2.back) {
+            } else if (gamepad2.right_bumper) {
                arm.resetArmEncoder();
             }
 
            if (gamepad2.left_bumper){
                 wrist.moveToPosition(.75);
-            } else if (gamepad2.right_bumper){
+            } else if (gamepad2.left_trigger > 0){
                 wrist.moveToPosition(0);
             }
 
@@ -126,6 +123,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
             }
 
             driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
+            driveSubsystem.moveFieldCentric(forward, strafe, turn);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
