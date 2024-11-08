@@ -94,6 +94,8 @@ public class DriveOnlyOpMode extends LinearOpMode {
                 slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
             } else if (gamepad1.dpad_left){
                 slideSubsystem.setPosition(SlideSubsystem.LIFT_SHORT_REACH);
+            } else if (gamepad1.dpad_right){
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_LOW_BASKET);
             }
 
              //Handles move arm to set positions with a fudge factor
