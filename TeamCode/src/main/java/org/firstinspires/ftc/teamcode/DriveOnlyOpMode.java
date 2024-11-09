@@ -104,6 +104,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
             double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
             if (gamepad2.a){
                 arm.moveToBottom(fudgeFactorPercentage);
+                arm.resetArmEncoder();
             } else if (gamepad2.b){
                 arm.moveToParallel(fudgeFactorPercentage);
             } else if (gamepad2.y){
@@ -114,12 +115,12 @@ public class DriveOnlyOpMode extends LinearOpMode {
                arm.resetArmEncoder();
             }
 
-           if (gamepad2.left_bumper){
+           if (gamepad2.right_bumper){
                 wrist.moveToPosition(.75);
-            } else if (gamepad2.right_bumper){
+            } else if (gamepad2.left_bumper){
                 wrist.moveToPosition(0);
             } else {
-               wrist.moveToPosition(.35);
+               wrist.moveToPosition(.15);
            }
 
             if (gamepad2.dpad_left){
