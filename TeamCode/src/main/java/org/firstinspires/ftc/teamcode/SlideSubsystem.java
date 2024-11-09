@@ -15,8 +15,9 @@ public class SlideSubsystem {
     public static final double LIFT_TICKS_PER_INCH = 120;
 
     public static final double LIFT_COLLAPSED = 0 * LIFT_TICKS_PER_INCH;
-    public static final double LIFT_SCORING_IN_LOW_BASKET = 0 * LIFT_TICKS_PER_INCH;
-    public static final double LIFT_SCORING_IN_HIGH_BASKET = 12 * LIFT_TICKS_PER_INCH;
+    public static final double LIFT_SCORING_IN_LOW_BASKET = 12 * LIFT_TICKS_PER_INCH;
+    public static final double LIFT_SCORING_IN_HIGH_BASKET = 20 * LIFT_TICKS_PER_INCH;
+    public static final double LIFT_SHORT_REACH = 6 * LIFT_TICKS_PER_INCH;
 
     double liftPosition = LIFT_COLLAPSED;
 
