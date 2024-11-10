@@ -72,6 +72,7 @@ public class ArmSubsystem {
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+
     public void addTelemetry(){
         telemetry.addData("arm position",armMotor.getCurrentPosition());
         telemetry.addData("arm busy", armMotor.isBusy());

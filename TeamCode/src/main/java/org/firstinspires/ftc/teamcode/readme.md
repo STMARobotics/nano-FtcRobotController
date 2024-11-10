@@ -1,4 +1,12 @@
 ## TeamCode Module
+TODO: Create a record Mode?
+TODO: Lime Light (odometry)
+TODO: Auto Reset
+TODO: Fudge Factor on Slide
+TODO: Slide Stop
+TODO: Sensors
+TODO: Flush out Autonomous Modes (self driving)
+
 
 Welcome!
 

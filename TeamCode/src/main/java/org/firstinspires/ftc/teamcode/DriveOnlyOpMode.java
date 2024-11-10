@@ -104,7 +104,6 @@ public class DriveOnlyOpMode extends LinearOpMode {
             double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
             if (gamepad2.a){
                 arm.moveToBottom(fudgeFactorPercentage);
-                arm.resetArmEncoder();
             } else if (gamepad2.b){
                 arm.moveToParallel(fudgeFactorPercentage);
             } else if (gamepad2.y){
