@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -81,7 +82,7 @@ public class DriveSubsystem {
 
     private final double countsPerInch = 40;
     private final double degreeTicks = 10.5;
-    private final double strafeTicksPerInch = 70;
+    private final double strafeTicksPerInch = 45;
 
     private BooleanSupplier isActiveOpMode;
     private int newFrontRightTarget;
@@ -259,10 +260,10 @@ public class DriveSubsystem {
 
     public void driveForward(double speed, double inches) {
         System.out.println("******************** FORWARD ****************");
-        newFrontRightTarget = frontRightMotor.getCurrentPosition() - (int) (inches * countsPerInch);
-        newFrontLeftTarget = frontLeftMotor.getCurrentPosition() - (int) (inches * countsPerInch);
-        newBackRightTarget = backRightMotor.getCurrentPosition() - (int) (inches * countsPerInch);
-        newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (inches * countsPerInch);
+        newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) (inches * countsPerInch);
+        newFrontLeftTarget = frontLeftMotor.getCurrentPosition() + (int) (inches * countsPerInch);
+        newBackRightTarget = backRightMotor.getCurrentPosition() + (int) (inches * countsPerInch);
+        newBackLeftTarget = backLeftMotor.getCurrentPosition() + (int) (inches * countsPerInch);
 
         frontRightMotor.setTargetPosition(newFrontRightTarget);
         frontLeftMotor.setTargetPosition(newFrontLeftTarget);
@@ -284,10 +285,10 @@ public class DriveSubsystem {
 
     public void strafeLeft(double speed, double inches) {
 
-        int newFrontRightTarget = frontRightMotor.getCurrentPosition() - (int) (inches * strafeTicksPerInch);
-        int newFrontLeftTarget = frontLeftMotor.getCurrentPosition() + (int) (inches * strafeTicksPerInch);
-        int newBackRightTarget = backRightMotor.getCurrentPosition() + (int) (inches * strafeTicksPerInch);
-        int newBackLeftTarget = backLeftMotor.getCurrentPosition() - (int) (inches * strafeTicksPerInch);
+        int newFrontRightTarget = frontRightMotor.getCurrentPosition() + (int) (inches * strafeTicksPerInch);
+        int newFrontLeftTarget = frontLeftMotor.getCurrentPosition() - (int) (inches * strafeTicksPerInch);
+        int newBackRightTarget = backRightMotor.getCurrentPosition() - (int) (inches * strafeTicksPerInch);
+        int newBackLeftTarget = backLeftMotor.getCurrentPosition() + (int) (inches * strafeTicksPerInch);
 
         frontRightMotor.setTargetPosition(newFrontRightTarget);
         frontLeftMotor.setTargetPosition(newFrontLeftTarget);

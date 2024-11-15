@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import static org.firstinspires.ftc.teamcode.CommandFactory.Backward;
 import static org.firstinspires.ftc.teamcode.CommandFactory.Forward;
 import static org.firstinspires.ftc.teamcode.CommandFactory.Pause;
+import static org.firstinspires.ftc.teamcode.CommandFactory.StrafeLeft;
 import static org.firstinspires.ftc.teamcode.CommandFactory.TurnLeft;
 import static org.firstinspires.ftc.teamcode.CommandFactory.TurnRight;
 
@@ -79,11 +80,11 @@ public class TestAutoOpmode10 extends LinearOpMode {
 
         CommandRunner.OpMode(this)
                 .commands(
-                        Forward(-10, .5, 3),
-                        Pause(1),
-                        Backward(10, .5, 3)
+//                        StrafeLeft(10, .5, 3)
+//                        Pause(1),
+//                        Backward(10, .5, 3)
 //                        Backward(12, .5, 3)
-//                        TurnRight(90, 10)
+                        TurnRight(45, 10)
 //                       StrafeLeft(12, 0.5, 2)
 //                        Backward(12, 2, 4),
 //                        TurnRight(11, 3),

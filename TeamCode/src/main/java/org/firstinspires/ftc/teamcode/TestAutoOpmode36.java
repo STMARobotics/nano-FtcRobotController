@@ -29,9 +29,9 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.CommandFactory.Backward;
 import static org.firstinspires.ftc.teamcode.CommandFactory.Forward;
-import static org.firstinspires.ftc.teamcode.CommandFactory.Pause;
+import static org.firstinspires.ftc.teamcode.CommandFactory.StrafeLeft;
+import static org.firstinspires.ftc.teamcode.CommandFactory.TurnRight;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -62,9 +62,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: Auto works", group="Robot")
+@Autonomous(name="Robot: Forward 36", group="Robot")
 //@Disabled
-public class TestAutoOpmode25 extends LinearOpMode {
+public class TestAutoOpmode36 extends LinearOpMode {
     private DriveSubsystem driveSubSystem;
 
     @Override
@@ -77,11 +77,12 @@ public class TestAutoOpmode25 extends LinearOpMode {
 
         CommandRunner.OpMode(this)
                 .commands(
-                        Forward(-25, .5, 3),
-                        Pause(1)
+//                        StrafeLeft(36, .5, 3)
+//                        Pause(1),
+//                        Backward(24, .5, 3)
 
 //                        Backward(12, .5, 3)
-//                        TurnRight(90, 10)
+                        TurnRight(360, 10)
 //                       StrafeLeft(12, 0.5, 2)
 //                        Backward(12, 2, 4),
 //                        TurnRight(11, 3),

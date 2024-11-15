@@ -47,36 +47,36 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Field Centric OpMode", group="Linear OpMode")
+@TeleOp(name="Main OpMode", group="Linear OpMode")
 //@Disabled
-public class FieldCentricOpMode extends LinearOpMode {
+public class MainOpMode extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     DriveSubsystem driveSubsystem;
-//    SlideSubsystem slideSubsystem;
-//    ArmSubsystem arm;
-//    WristSubsystem wrist;
-//    IntakeSubsystem intake;
+    SlideSubsystem slideSubsystem;
+    ArmSubsystem arm;
+    WristSubsystem wrist;
+    IntakeSubsystem intake;
 
     @Override
     public void runOpMode() {
         DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-//        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
-//        arm = new ArmSubsystem(hardwareMap, telemetry);
-//        wrist = new WristSubsystem(hardwareMap, telemetry);
-//        intake = new IntakeSubsystem(hardwareMap,telemetry);
-        // Wait for the game to start (driver presses START)
+        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
+        arm = new ArmSubsystem(hardwareMap, telemetry);
+        wrist = new WristSubsystem(hardwareMap, telemetry);
+        intake = new IntakeSubsystem(hardwareMap,telemetry);
+  //       Wait for the game to start (driver presses START)
         waitForStart();
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            float forward = gamepad1.left_stick_y;
-            float strafe = - gamepad1.left_stick_x;
+            float forward = - gamepad1.left_stick_y;
+            float strafe = gamepad1.left_stick_x;
             float turn = gamepad1.right_stick_x;
 
             float reductionFactor = 2;
@@ -84,53 +84,60 @@ public class FieldCentricOpMode extends LinearOpMode {
                 reductionFactor = 6;
             }
 
-             //Move Slide to positions
-//            if (gamepad2.dpad_up){
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-//            } else if (gamepad2.dpad_down) {
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
-//            }
+
+
+    //         Move Slide to positions
+            if (gamepad1.dpad_up){
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
+            } else if (gamepad1.dpad_down) {
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
+            } else if (gamepad1.dpad_left){
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_SHORT_REACH);
+            } else if (gamepad1.dpad_right){
+                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_LOW_BASKET);
+            }
 
              //Handles move arm to set positions with a fudge factor
 //
 //            Not working but needs to be set to different spot since this may be used
-//            double fudgeFactorPercentage = gamepad2.right_trigger + (gamepad2.left_trigger);
-//            if (gamepad2.a){
-//                arm.moveToBottom(fudgeFactorPercentage);
-//            } else if (gamepad2.b){
-//                arm.moveToParallel(fudgeFactorPercentage);
-//            } else if (gamepad2.y){
-//                arm.moveToTop(fudgeFactorPercentage);
-//            } else if (gamepad2.x){
-//               arm.moveToPickUpSpecimen(fudgeFactorPercentage);
-//            } else if (gamepad2.right_bumper) {
-//               arm.resetArmEncoder();
-//            }
+            double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
+            if (gamepad2.a){
+                arm.moveToBottom(fudgeFactorPercentage);
+            } else if (gamepad2.b){
+                arm.moveToParallel(fudgeFactorPercentage);
+            } else if (gamepad2.y){
+                arm.moveToTop(fudgeFactorPercentage);
+            } else if (gamepad2.x){
+               arm.moveToPickUpSpecimen(fudgeFactorPercentage);
+            } else if (gamepad2.back) {
+               arm.resetArmEncoder();
+            }
 
-//           if (gamepad2.left_bumper){
-//                wrist.moveToPosition(.75);
-//            } else if (gamepad2.left_trigger > 0){
-//                wrist.moveToPosition(0);
-//            }
+           if (gamepad2.right_bumper){
+                wrist.moveToPosition(.75);
+            } else if (gamepad2.left_bumper){
+                wrist.moveToPosition(0);
+            } else {
+               wrist.moveToPosition(.15);
+           }
 
-//            if (gamepad2.dpad_left){
-//               intake.spinForward();
-//            }
-//            else if (gamepad2.dpad_right) {
-//                intake.spinBackward();
-//            } else {
-//                intake.stop();
-//            }
+            if (gamepad2.dpad_left){
+               intake.spinForward();
+            }
+            else if (gamepad2.dpad_right) {
+                intake.spinBackward();
+            } else {
+                intake.stop();
+            }
 
             driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
-            driveSubsystem.moveFieldCentric(forward, strafe, turn);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-//            arm.addTelemetry();
-//            slideSubsystem.addTelemetry();
-//            wrist.addTelemetry();
-//            intake.addTelemetry();
+            arm.addTelemetry();
+            slideSubsystem.addTelemetry();
+            wrist.addTelemetry();
+            intake.addTelemetry();
             telemetry.update();
         }
     }
