@@ -84,46 +84,7 @@ public class FieldCentricOpMode extends LinearOpMode {
                 reductionFactor = 6;
             }
 
-             //Move Slide to positions
-//            if (gamepad2.dpad_up){
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-//            } else if (gamepad2.dpad_down) {
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
-//            }
-
-             //Handles move arm to set positions with a fudge factor
-//
-//            Not working but needs to be set to different spot since this may be used
-//            double fudgeFactorPercentage = gamepad2.right_trigger + (gamepad2.left_trigger);
-//            if (gamepad2.a){
-//                arm.moveToBottom(fudgeFactorPercentage);
-//            } else if (gamepad2.b){
-//                arm.moveToParallel(fudgeFactorPercentage);
-//            } else if (gamepad2.y){
-//                arm.moveToTop(fudgeFactorPercentage);
-//            } else if (gamepad2.x){
-//               arm.moveToPickUpSpecimen(fudgeFactorPercentage);
-//            } else if (gamepad2.right_bumper) {
-//               arm.resetArmEncoder();
-//            }
-
-//           if (gamepad2.left_bumper){
-//                wrist.moveToPosition(.75);
-//            } else if (gamepad2.left_trigger > 0){
-//                wrist.moveToPosition(0);
-//            }
-
-//            if (gamepad2.dpad_left){
-//               intake.spinForward();
-//            }
-//            else if (gamepad2.dpad_right) {
-//                intake.spinBackward();
-//            } else {
-//                intake.stop();
-//            }
-
-            driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
-            driveSubsystem.moveFieldCentric(forward, strafe, turn);
+            driveSubsystem.moveFieldCentric(forward, strafe, turn, reductionFactor);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
