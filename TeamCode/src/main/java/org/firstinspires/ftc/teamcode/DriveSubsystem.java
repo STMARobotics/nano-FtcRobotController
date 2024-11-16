@@ -75,9 +75,9 @@ public class DriveSubsystem {
     public static final String BACK_LEFT_MOTOR = "back-left-motor";
     public static final String BACK_RIGHT_MOTOR = "back-right-motor";
 
-    private final double countsPerInch = 40;
-    private final double degreeTicks = 10.5;
-    private final double strafeTicksPerInch = 45;
+    private double countsPerInch = 40;
+    private double degreeTicks = 10.5;
+    private double strafeTicksPerInch = 45;
 
     private BooleanSupplier isActiveOpMode;
     private int newFrontRightTarget;
@@ -343,5 +343,29 @@ public class DriveSubsystem {
                 frontLeftMotor.getCurrentPosition(), frontRightMotor.getCurrentPosition(),
                 backLeftMotor.getCurrentPosition(), backRightMotor.getCurrentPosition());
         telemetry.update();
+    }
+
+    public double getCountsPerInch() {
+        return countsPerInch;
+    }
+
+    public void setCountsPerInch(double countsPerInch) {
+        this.countsPerInch = countsPerInch;
+    }
+
+    public double getDegreeTicks() {
+        return degreeTicks;
+    }
+
+    public void setDegreeTicks(double degreeTicks) {
+        this.degreeTicks = degreeTicks;
+    }
+
+    public double getStrafeTicksPerInch() {
+        return strafeTicksPerInch;
+    }
+
+    public void setStrafeTicksPerInch(double strafeTicksPerInch) {
+        this.strafeTicksPerInch = strafeTicksPerInch;
     }
 }
