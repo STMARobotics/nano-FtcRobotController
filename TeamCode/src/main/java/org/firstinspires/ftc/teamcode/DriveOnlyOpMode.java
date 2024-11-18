@@ -47,18 +47,20 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Main OpMode", group="Linear OpMode")
+@TeleOp(name="Drive only OpMode", group="Linear OpMode")
 //@Disabled
 public class DriveOnlyOpMode extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     DriveSubsystem driveSubsystem;
+    DistanceSensorSubsystem sensorSubsystem;
 
 
     @Override
     public void runOpMode() {
         DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
+        sensorSubsystem = new DistanceSensorSubsystem(hardwareMap, telemetry);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
   //       Wait for the game to start (driver presses START)
@@ -81,6 +83,7 @@ public class DriveOnlyOpMode extends LinearOpMode {
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            sensorSubsystem.addTelemetry();
             telemetry.update();
         }
     }

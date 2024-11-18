@@ -68,12 +68,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //@Disabled
 public class TestAutoOpmode24 extends LinearOpMode {
     private DriveSubsystem driveSubSystem;
+    private DistanceSensorSubsystem distanceSensor;
 
     @Override
     public void runOpMode() {
 
         driveSubSystem = new DriveSubsystem(hardwareMap, telemetry);
-        CommandFactory.InitFactory(driveSubSystem);
+        distanceSensor= new DistanceSensorSubsystem(hardwareMap, telemetry);
+        CommandFactory.InitFactory(driveSubSystem, distanceSensor);
 
         waitForStart();
 
