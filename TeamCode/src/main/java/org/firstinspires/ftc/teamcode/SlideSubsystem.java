@@ -53,4 +53,15 @@ public class SlideSubsystem {
         telemetry.addData("slide target position", slideMotor.getTargetPosition());
         telemetry.addData("slide busy", slideMotor.isBusy());
     }
+
+    public boolean isMoving() {
+        return slideMotor.isBusy();
+    }
+
+    public void holdPosition(){
+        int currentPosition = slideMotor.getCurrentPosition();
+        slideMotor.setTargetPosition(currentPosition);
+        ((DcMotorEx) slideMotor).setVelocity(2100);
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
 }

@@ -30,7 +30,7 @@ public class ArmSubsystem {
         this.hardwareMap = hm;
         this.telemetry = telemetry;
 
-        armMotor=hm.get(DcMotor.class, ARM_MOTOR);
+        armMotor=hardwareMap.get(DcMotor.class, ARM_MOTOR);
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ((DcMotorEx)armMotor).setCurrentAlert(5, CurrentUnit.AMPS);
         armMotor.setTargetPosition(0);
@@ -64,7 +64,11 @@ public class ArmSubsystem {
     }
 
     private void setArmPosition(double position) {
-        armMotor.setTargetPosition((int)(position));
+        setArmPosition((int)position);
+    }
+
+    public void setArmPosition(int position) {
+        armMotor.setTargetPosition(position);
         ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
@@ -76,6 +80,17 @@ public class ArmSubsystem {
     public void addTelemetry(){
         telemetry.addData("arm position",armMotor.getCurrentPosition());
         telemetry.addData("arm busy", armMotor.isBusy());
+    }
+
+    public boolean isMoving(){
+        return armMotor.isBusy();
+    }
+
+    public void holdPosition(){
+        int currentPosition = armMotor.getCurrentPosition();
+        armMotor.setTargetPosition(currentPosition);
+        ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
 }

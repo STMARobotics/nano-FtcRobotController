@@ -56,8 +56,9 @@ public class ConfigValuesOpMode extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     DriveSubsystem driveSubsystem;
-//    SlideSubsystem slideSubsystem;
-//    ArmSubsystem arm;
+    SlideSubsystem slideSubsystem;
+    ArmSubsystem arm;
+    DistanceSensorSubsystem distanceSensorSubsystem;
 //    WristSubsystem wrist;
 //    IntakeSubsystem intake;
 
@@ -80,8 +81,11 @@ public class ConfigValuesOpMode extends LinearOpMode {
     private String subMode = "ticks";
     @Override
     public void runOpMode() {
-        DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
-        CommandFactory.InitFactory(driveSubsystem);
+        driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
+        slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
+        arm = new ArmSubsystem(hardwareMap, telemetry);
+        distanceSensorSubsystem = new DistanceSensorSubsystem(hardwareMap,telemetry);
+        CommandFactory.InitFactory(driveSubsystem, distanceSensorSubsystem, arm, slideSubsystem );
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();

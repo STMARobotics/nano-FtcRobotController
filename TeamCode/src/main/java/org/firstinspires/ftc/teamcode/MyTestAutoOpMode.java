@@ -65,12 +65,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class MyTestAutoOpMode extends LinearOpMode {
     private DriveSubsystem driveSubSystem;
     private DistanceSensorSubsystem distanceSensor;
+    private ArmSubsystem armSubsystem;
+    private SlideSubsystem slideSubsystem;
     @Override
     public void runOpMode() {
 
         driveSubSystem = new DriveSubsystem(hardwareMap, telemetry);
         distanceSensor = new DistanceSensorSubsystem(hardwareMap, telemetry);
-        CommandFactory.InitFactory(driveSubSystem, distanceSensor);
+        armSubsystem =  new ArmSubsystem(hardwareMap, telemetry);
+        slideSubsystem = new SlideSubsystem(hardwareMap,telemetry);
+        CommandFactory.InitFactory(driveSubSystem, distanceSensor,armSubsystem,slideSubsystem);
 
         waitForStart();
 
@@ -82,7 +86,10 @@ public class MyTestAutoOpMode extends LinearOpMode {
                         Pause(.25),
                         Backward(12, .5, 3),
                         Pause(.25),
-                        TurnRight(45, 3)
+                        TurnRight(45, 3),
+                        MoveArmToPosition(15, 3),
+                        ResetArmPosition(),
+                        MoveSlideToPosition(15, 3)
 //                        Backward(12, .5, 3)
 //                        TurnRight(90, 10)
 //                       StrafeLeft(12, 0.5, 2)
