@@ -1,6 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.commands;
 
-public class MoveArmToPositionCommand implements Command{
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MoveArmToPositionCommand implements ConfigurableCommand {
     private ArmSubsystem armSystem;
     private int timeout;
 
@@ -41,5 +46,28 @@ public class MoveArmToPositionCommand implements Command{
 
     @Override
     public void init(){
+    }
+
+    @Override
+    public String getName() {
+        return "Move Arm To Position";
+    }
+
+    @Override
+    public Map<String, String> getValues() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("position", Integer.toString(position));
+        return map;
+    }
+
+    @Override
+    public void increment() {
+       position = position + 1;
+    }
+
+    @Override
+    public void decrement() {
+        position = position - 1;
+
     }
 }

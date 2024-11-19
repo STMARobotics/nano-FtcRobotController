@@ -1,6 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.commands;
 
-public class ResetArmCommand implements Command {
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
+
+import java.util.Collections;
+import java.util.Map;
+
+public class ResetArmCommand implements ConfigurableCommand {
     private final ArmSubsystem arm;
 
     public ResetArmCommand(ArmSubsystem arm) {
@@ -35,5 +40,25 @@ public class ResetArmCommand implements Command {
     @Override
     public int getTimeout() {
         return 1;
+    }
+
+    @Override
+    public String getName() {
+        return "Reset Arm";
+    }
+
+    @Override
+    public Map<String, String> getValues() {
+        return Collections.emptyMap();
+    }
+
+    @Override
+    public void increment() {
+
+    }
+
+    @Override
+    public void decrement() {
+
     }
 }

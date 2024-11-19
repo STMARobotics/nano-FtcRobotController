@@ -1,9 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.commands;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public class PauseCommand implements Command {
-    private final double seconds;
+public class PauseCommand implements ConfigurableCommand {
+    private double seconds;
     private long startTime;
 
 
@@ -43,5 +45,27 @@ public class PauseCommand implements Command {
     @Override
     public int getTimeout() {
         return (int) this.seconds + 1;
+    }
+
+    @Override
+    public String getName() {
+        return "Pause";
+    }
+
+    @Override
+    public Map<String, String> getValues() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("seconds", Double.toString(seconds));
+        return map;
+    }
+
+    @Override
+    public void increment() {
+        seconds = seconds + .25;
+    }
+
+    @Override
+    public void decrement() {
+        seconds = seconds - .25;
     }
 }

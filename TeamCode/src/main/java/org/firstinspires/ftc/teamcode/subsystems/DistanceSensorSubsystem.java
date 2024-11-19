@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -7,16 +7,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class DistanceSensorSubsystem {
-    private DistanceSensor distanceSensor;
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
+    private final DistanceSensor distanceSensor;
+    private final Telemetry telemetry;
 
     public static final String DISTANCE_SENSOR = "distance";
 
     public DistanceSensorSubsystem(HardwareMap hm, Telemetry telemetry) {
-        this.hardwareMap = hm;
         this.telemetry = telemetry;
-        this.distanceSensor = hardwareMap.get(DistanceSensor.class, DISTANCE_SENSOR);
+        this.distanceSensor = hm.get(DistanceSensor.class, DISTANCE_SENSOR);
     }
 
 

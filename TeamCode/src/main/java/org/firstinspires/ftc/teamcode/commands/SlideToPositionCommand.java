@@ -1,8 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.commands;
 
-public class SlideToPositionCommand implements Command {
+import org.firstinspires.ftc.teamcode.subsystems.SlideSubsystem;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class SlideToPositionCommand implements ConfigurableCommand {
     private final SlideSubsystem slideSubsystem;
-    private final int position;
+    private int position;
     private final int timeout;
 
     public SlideToPositionCommand(SlideSubsystem slideSubsystem, int position, int timeout) {
@@ -39,5 +44,27 @@ public class SlideToPositionCommand implements Command {
     @Override
     public int getTimeout() {
         return timeout;
+    }
+
+    @Override
+    public String getName() {
+        return "Slide To Position";
+    }
+
+    @Override
+    public Map<String, String> getValues() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("position", Integer.toString(position));
+        return map;
+    }
+
+    @Override
+    public void increment() {
+        position = position + 1;
+    }
+
+    @Override
+    public void decrement() {
+        position = position - 1;
     }
 }

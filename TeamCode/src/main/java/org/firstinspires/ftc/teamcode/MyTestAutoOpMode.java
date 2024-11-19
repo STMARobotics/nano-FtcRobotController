@@ -29,10 +29,17 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.CommandFactory.*;
+import static org.firstinspires.ftc.teamcode.commands.CommandFactory.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.commands.CommandFactory;
+import org.firstinspires.ftc.teamcode.commands.CommandRunner;
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.DistanceSensorSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.SlideSubsystem;
 
 /*
  * This OpMode illustrates the concept of driving a path based on encoder counts.

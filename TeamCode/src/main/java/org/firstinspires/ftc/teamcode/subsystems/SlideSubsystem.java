@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -21,14 +21,12 @@ public class SlideSubsystem {
 
     double liftPosition = LIFT_COLLAPSED;
 
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
+    private final Telemetry telemetry;
 
     public SlideSubsystem (HardwareMap hm, Telemetry telemetry){
-        this.hardwareMap = hm;
         this.telemetry = telemetry;
 
-        slideMotor = hardwareMap.get(DcMotor.class, SLIDE_MOTOR);
+        slideMotor = hm.get(DcMotor.class, SLIDE_MOTOR);
 
         slideMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         slideMotor.setTargetPosition(0);
@@ -63,5 +61,15 @@ public class SlideSubsystem {
         slideMotor.setTargetPosition(currentPosition);
         ((DcMotorEx) slideMotor).setVelocity(2100);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public void hardReset(){
+        slideMotor.setPower(0);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

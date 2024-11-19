@@ -33,7 +33,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import java.util.function.Function;
+import org.firstinspires.ftc.teamcode.commands.CommandFactory;
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.DistanceSensorSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.SlideSubsystem;
 
 
 /*
@@ -59,6 +63,7 @@ public class ConfigValuesOpMode extends LinearOpMode {
     SlideSubsystem slideSubsystem;
     ArmSubsystem arm;
     DistanceSensorSubsystem distanceSensorSubsystem;
+
 //    WristSubsystem wrist;
 //    IntakeSubsystem intake;
 

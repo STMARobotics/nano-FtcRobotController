@@ -1,6 +1,8 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.commands;
 
-public abstract class DriveCommand implements Command{
+import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
+
+public abstract class DriveCommand implements ConfigurableCommand {
     protected DriveSubsystem driveSystem;
     protected int timeout;
 

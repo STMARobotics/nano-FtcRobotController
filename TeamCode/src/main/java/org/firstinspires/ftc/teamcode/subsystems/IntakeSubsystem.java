@@ -1,27 +1,24 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class IntakeSubsystem {
     public static final String INTAKE_SERVO = "intake-servo";
 
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
+    private final Telemetry telemetry;
 
     public static final double SERVO_SPEED = 0.5;
 
-    private CRServo servo;
+    private final CRServo servo;
 
     public IntakeSubsystem(HardwareMap hm, Telemetry telemetry){
-        this.hardwareMap = hm;
         this.telemetry = telemetry;
 
-        servo = hardwareMap.get(CRServo.class, INTAKE_SERVO);
+        servo = hm.get(CRServo.class, INTAKE_SERVO);
     }
 
     public void spinForward(){

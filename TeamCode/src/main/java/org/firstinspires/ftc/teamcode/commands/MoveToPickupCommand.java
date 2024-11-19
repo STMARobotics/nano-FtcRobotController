@@ -1,8 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.commands;
 
-import static org.firstinspires.ftc.teamcode.CommandFactory.Forward;
+import static org.firstinspires.ftc.teamcode.commands.CommandFactory.Forward;
 
-public class MoveToPickupCommand implements Command{
+import org.firstinspires.ftc.teamcode.subsystems.DistanceSensorSubsystem;
+
+import java.util.Collections;
+import java.util.Map;
+
+public class MoveToPickupCommand implements ConfigurableCommand {
     public final DistanceSensorSubsystem sensor;
 
     public static final double EXPECTED_DISTANCE = 10;
@@ -46,5 +51,25 @@ public class MoveToPickupCommand implements Command{
     @Override
     public int getTimeout() {
         return 0;
+    }
+
+    @Override
+    public String getName() {
+        return "Distance Command";
+    }
+
+    @Override
+    public Map<String, String> getValues() {
+        return Collections.emptyMap();
+    }
+
+    @Override
+    public void increment() {
+
+    }
+
+    @Override
+    public void decrement() {
+
     }
 }

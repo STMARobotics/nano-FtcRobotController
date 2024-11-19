@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -67,8 +67,8 @@ public class DriveSubsystem {
     private DcMotor backLeftMotor;
     private DcMotor backRightMotor;
 
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
+    private final HardwareMap hardwareMap;
+    private final Telemetry telemetry;
 
     public static final String FRONT_LEFT_MOTOR = "front-left-motor";
     public static final String FRONT_RIGHT_MOTOR = "front-right-motor";
@@ -78,8 +78,6 @@ public class DriveSubsystem {
     private double countsPerInch = 40;
     private double degreeTicks = 10.5;
     private double strafeTicksPerInch = 45;
-
-    private BooleanSupplier isActiveOpMode;
     private int newFrontRightTarget;
     private int newFrontLeftTarget;
     private int newBackRightTarget;

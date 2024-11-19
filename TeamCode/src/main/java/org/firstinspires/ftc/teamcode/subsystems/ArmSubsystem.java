@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -9,10 +9,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class ArmSubsystem {
     public static final int ARM_SPEED = 1000;
-    private DcMotor armMotor;
+    private final DcMotor armMotor;
 
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
+    private final Telemetry telemetry;
 
     public static final String ARM_MOTOR = "armMotor";
 
@@ -27,10 +26,9 @@ public class ArmSubsystem {
     static double FUDGE_FACTOR_DEGREES = 15;
 
     public ArmSubsystem(HardwareMap hm, Telemetry telemetry)    {
-        this.hardwareMap = hm;
         this.telemetry = telemetry;
 
-        armMotor=hardwareMap.get(DcMotor.class, ARM_MOTOR);
+        armMotor= hm.get(DcMotor.class, ARM_MOTOR);
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ((DcMotorEx)armMotor).setCurrentAlert(5, CurrentUnit.AMPS);
         armMotor.setTargetPosition(0);
@@ -93,4 +91,13 @@ public class ArmSubsystem {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
+    public void hardReset(){
+        armMotor.setPower(0);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        resetArmEncoder();
+    }
 }
