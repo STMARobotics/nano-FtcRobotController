@@ -3,17 +3,20 @@ package org.firstinspires.ftc.teamcode.commands;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CommandRunner {
 
     private final LinearOpMode opMode;
-    private Command[] commands;
+    private ArrayList<Command> commands;
 
     public CommandRunner(LinearOpMode opMode) {
         this.opMode = opMode;
     }
 
     public CommandRunner commands(Command... commands) {
-        this.commands = commands;
+        this.commands = new ArrayList<Command>(Arrays.asList(commands));
         return this;
     }
 
@@ -33,5 +36,13 @@ public class CommandRunner {
             }
             command.onComplete();
         }
+    }
+
+    public void addCommand(Command command) {
+        commands.add(command);
+    }
+
+    public void addCommandAtIndex(Command command, int index){
+        commands.add(index, command);
     }
 }
