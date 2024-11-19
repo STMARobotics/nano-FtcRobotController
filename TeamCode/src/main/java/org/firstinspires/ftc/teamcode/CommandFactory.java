@@ -4,14 +4,18 @@ public class CommandFactory {
     private static CommandFactory commandFactory;
     private final DriveSubsystem driveSubsystem;
     private final DistanceSensorSubsystem distanceSensor;
+    private final ArmSubsystem arm;
+    private final SlideSubsystem slideSubsystem;
 
-    private CommandFactory(DriveSubsystem driveSubsystem, DistanceSensorSubsystem distanceSensor) {
+    private CommandFactory(DriveSubsystem driveSubsystem, DistanceSensorSubsystem distanceSensor, ArmSubsystem arm, SlideSubsystem slideSubsystem) {
         this.driveSubsystem = driveSubsystem;
         this.distanceSensor = distanceSensor;
+        this.arm = arm;
+        this.slideSubsystem = slideSubsystem;
     }
 
-    public static void InitFactory(DriveSubsystem driveSubSystem, DistanceSensorSubsystem distanceSensor) {
-        commandFactory = new CommandFactory(driveSubSystem, distanceSensor);
+    public static void InitFactory(DriveSubsystem driveSubSystem, DistanceSensorSubsystem distanceSensor, ArmSubsystem arm, SlideSubsystem slideSubsystem) {
+        commandFactory = new CommandFactory(driveSubSystem, distanceSensor, arm, slideSubsystem);
     }
 
 
@@ -45,5 +49,17 @@ public class CommandFactory {
 
     public static Command MoveToPickup() {
         return new MoveToPickupCommand(commandFactory.distanceSensor);
+    }
+
+    public static Command MoveArmToPosition(int position, int timeout){
+        return new MoveArmToPositionCommand(commandFactory.arm, position, timeout);
+    }
+
+    public static Command ResetArmPosition(){
+        return new ResetArmCommand(commandFactory.arm);
+    }
+
+    public static Command MoveSlideToPosition(int position, int timeout){
+        return new SlideToPositionCommand(commandFactory.slideSubsystem, position, timeout);
     }
 }
