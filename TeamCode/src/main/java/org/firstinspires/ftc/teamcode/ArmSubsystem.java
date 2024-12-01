@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -16,14 +17,13 @@ public class ArmSubsystem {
 
     public static final String ARM_MOTOR = "armMotor";
 
-    final double ARM_TICKS_PER_DEGREE = 18;
+    final double ARM_TICKS_PER_DEGREE = 7;
 
     final double ARM_TOP = 90 * ARM_TICKS_PER_DEGREE;
     final double ARM_BOTTOM = 0 * ARM_TICKS_PER_DEGREE;
     final double ARM_PARALLEL = 40 * ARM_TICKS_PER_DEGREE;
     final double ARM_PICKUP = 15* ARM_TICKS_PER_DEGREE;
     final double MAX_POSITION = 90 * ARM_TICKS_PER_DEGREE;
-
     static double FUDGE_FACTOR_DEGREES = 15;
 
     public ArmSubsystem(HardwareMap hm, Telemetry telemetry)    {
@@ -36,6 +36,7 @@ public class ArmSubsystem {
         armMotor.setTargetPosition(0);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
@@ -47,6 +48,10 @@ public class ArmSubsystem {
     public void moveToBottom(double alteration){
         setArmPosition(ARM_BOTTOM + (getAlterationDegrees(alteration)));
     }
+
+    public void moveToBottom(){}
+
+    public void moveToBottom(float foo){}
 
     public void moveToParallel(double alteration){
         setArmPosition(ARM_PARALLEL + (getAlterationDegrees(alteration)));
