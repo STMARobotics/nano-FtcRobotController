@@ -61,7 +61,7 @@ public class MainOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
+        driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);

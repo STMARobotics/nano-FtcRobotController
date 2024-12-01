@@ -32,8 +32,8 @@ public class SlideSubsystem {
 
         slideMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         slideMotor.setTargetPosition(0);
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void changePosition(int positionDelta){
@@ -42,10 +42,11 @@ public class SlideSubsystem {
     }
 
     public void setPosition(double liftPosition) {
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         slideMotor.setTargetPosition((int) (liftPosition));
 
         ((DcMotorEx) slideMotor).setVelocity(2100);
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
     }
 
     public void addTelemetry(){
