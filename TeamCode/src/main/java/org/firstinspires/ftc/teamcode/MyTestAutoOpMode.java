@@ -74,7 +74,7 @@ public class MyTestAutoOpMode extends LinearOpMode {
         distanceSensor = new DistanceSensorSubsystem(hardwareMap, telemetry);
         armSubsystem =  new ArmSubsystem(hardwareMap, telemetry);
         slideSubsystem = new SlideSubsystem(hardwareMap,telemetry);
-        CommandFactory.InitFactory(driveSubSystem, distanceSensor,armSubsystem,slideSubsystem);
+        CommandFactory.InitFactory(driveSubSystem, distanceSensor, armSubsystem,slideSubsystem);
 
         waitForStart();
 

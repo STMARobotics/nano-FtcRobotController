@@ -9,6 +9,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class SlideSubsystem {
 
+    public static final int SLIDE_VELOCITY = 2100;
+    public static final int ROTATIONS_PER_SECOND = 2800;
     private DcMotor slideMotor;
     public static final String SLIDE_MOTOR="slideMotor";
 
@@ -18,6 +20,9 @@ public class SlideSubsystem {
     public static final double LIFT_SCORING_IN_LOW_BASKET = 12 * LIFT_TICKS_PER_INCH;
     public static final double LIFT_SCORING_IN_HIGH_BASKET = 20 * LIFT_TICKS_PER_INCH;
     public static final double LIFT_SHORT_REACH = 6 * LIFT_TICKS_PER_INCH;
+
+    public static final int MAX_SLIDE_POSITIONS = 3000;
+    public static final int MIN_SLIDE_POSITION = -250;
 
     double liftPosition = LIFT_COLLAPSED;
 
@@ -36,15 +41,22 @@ public class SlideSubsystem {
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void changePosition(int positionDelta){
+    public void changePosition(double positionDelta){
         this.liftPosition = this.liftPosition + positionDelta;
         setPosition(this.liftPosition);
     }
 
     public void setPosition(double liftPosition) {
-        slideMotor.setTargetPosition((int) (liftPosition));
+        if (liftPosition > MAX_SLIDE_POSITIONS){
+            liftPosition = MAX_SLIDE_POSITIONS;
+        }
 
-        ((DcMotorEx) slideMotor).setVelocity(2100);
+        if (liftPosition > MIN_SLIDE_POSITION){
+            liftPosition = MIN_SLIDE_POSITION;
+        }
+
+        slideMotor.setTargetPosition((int) (liftPosition));
+        ((DcMotorEx) slideMotor).setVelocity(SLIDE_VELOCITY);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -60,8 +72,6 @@ public class SlideSubsystem {
 
     public void holdPosition(){
         int currentPosition = slideMotor.getCurrentPosition();
-        slideMotor.setTargetPosition(currentPosition);
-        ((DcMotorEx) slideMotor).setVelocity(2100);
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        setPosition(currentPosition);
     }
 }

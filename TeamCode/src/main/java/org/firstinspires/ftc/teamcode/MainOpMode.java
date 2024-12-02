@@ -61,6 +61,10 @@ public class MainOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        double cycleTime = 0;
+        double loopTime = 0;
+        double oldTime = 0;
+
         DriveSubsystem driveSubsystem = new DriveSubsystem(hardwareMap, telemetry);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -87,30 +91,46 @@ public class MainOpMode extends LinearOpMode {
 
 
     //         Move Slide to positions
-            if (gamepad1.dpad_up){
-                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-            } else if (gamepad1.dpad_down) {
-                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
-            } else if (gamepad1.dpad_left){
-                slideSubsystem.setPosition(SlideSubsystem.LIFT_SHORT_REACH);
-            } else if (gamepad1.dpad_right){
-                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_LOW_BASKET);
+//            if (gamepad1.dpad_up){
+//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
+//            } else if (gamepad1.dpad_down) {
+//                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
+//            } else if (gamepad1.dpad_left){
+//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SHORT_REACH);
+//            } else if (gamepad1.dpad_right){
+//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_LOW_BASKET);
+//            }
+
+            if (gamepad1.dpad_up) {
+                slideSubsystem.changePosition(cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND);
+            } else if (gamepad1.dpad_down){
+                slideSubsystem.changePosition(-cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND);
+            } else {
+                slideSubsystem.holdPosition();
             }
 
              //Handles move arm to set positions with a fudge factor
 //
 //            Not working but needs to be set to different spot since this may be used
-            double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
-            if (gamepad2.a){
-                arm.moveToBottom(fudgeFactorPercentage);
-            } else if (gamepad2.b){
-                arm.moveToParallel(fudgeFactorPercentage);
-            } else if (gamepad2.y){
-                arm.moveToTop(fudgeFactorPercentage);
-            } else if (gamepad2.x){
-               arm.moveToPickUpSpecimen(fudgeFactorPercentage);
-            } else if (gamepad2.back) {
-               arm.resetArmEncoder();
+//            double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
+//            if (gamepad2.a){
+//                arm.moveToBottom(fudgeFactorPercentage);
+//            } else if (gamepad2.b){
+//                arm.moveToParallel(fudgeFactorPercentage);
+//            } else if (gamepad2.y){
+//                arm.moveToTop(fudgeFactorPercentage);
+//            } else if (gamepad2.x){
+//               arm.moveToPickUpSpecimen(fudgeFactorPercentage);
+//            } else if (gamepad2.back) {
+//               arm.resetArmEncoder();
+//            }
+
+            if (gamepad2.right_trigger > 0) {
+                arm.moveUpTicks(cycleTime * ArmSubsystem.ROTATIONS_PER_SECOND);
+            } else if (gamepad2.left_trigger > 0) {
+                arm.moveDownTicks(cycleTime * ArmSubsystem.ROTATIONS_PER_SECOND);
+            }else {
+                arm.holdPosition();
             }
 
            if (gamepad2.right_bumper){
@@ -131,6 +151,10 @@ public class MainOpMode extends LinearOpMode {
             }
 
             driveSubsystem.moveRobotCentric(forward, strafe, turn, reductionFactor);
+
+            loopTime = getRuntime();
+            cycleTime = loopTime - oldTime;
+            oldTime = loopTime;
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
