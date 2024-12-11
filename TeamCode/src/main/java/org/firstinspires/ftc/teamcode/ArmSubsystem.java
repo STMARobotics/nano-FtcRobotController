@@ -8,7 +8,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class ArmSubsystem {
-    public static final int ARM_SPEED = 1000;
+    public static final int ARM_SPEED = 2100;
+    public static final int ROTATIONS_PER_SECOND = 2800;
     private DcMotor armMotor;
 
     private HardwareMap hardwareMap;
@@ -16,15 +17,15 @@ public class ArmSubsystem {
 
     public static final String ARM_MOTOR = "armMotor";
 
-    final double ARM_TICKS_PER_DEGREE = 18;
+    public static final int ARM_TICKS_PER_DEGREE = 18;
 
-    final double ARM_TOP = 90 * ARM_TICKS_PER_DEGREE;
-    final double ARM_BOTTOM = 0 * ARM_TICKS_PER_DEGREE;
-    final double ARM_PARALLEL = 40 * ARM_TICKS_PER_DEGREE;
-    final double ARM_PICKUP = 15* ARM_TICKS_PER_DEGREE;
-    final double MAX_POSITION = 90 * ARM_TICKS_PER_DEGREE;
-
-    static double FUDGE_FACTOR_DEGREES = 15;
+    public static final double ARM_TOP = 90 * ARM_TICKS_PER_DEGREE;
+    public static final double ARM_BOTTOM = 0 * ARM_TICKS_PER_DEGREE;
+    public static final double ARM_PARALLEL = 40 * ARM_TICKS_PER_DEGREE;
+    public static final double ARM_PICKUP = 15* ARM_TICKS_PER_DEGREE;
+    public static final int MAX_POSITION = 90 * ARM_TICKS_PER_DEGREE;
+    public static final int MIN_POSITION = -10 * ARM_TICKS_PER_DEGREE;
+    public static double FUDGE_FACTOR_DEGREES = 15;
 
     public ArmSubsystem(HardwareMap hm, Telemetry telemetry)    {
         this.hardwareMap = hm;
@@ -35,6 +36,7 @@ public class ArmSubsystem {
         ((DcMotorEx)armMotor).setCurrentAlert(5, CurrentUnit.AMPS);
         armMotor.setTargetPosition(0);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -71,7 +73,7 @@ public class ArmSubsystem {
         armMotor.setTargetPosition(position);
         ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
+  }
     public void resetArmEncoder(){
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
@@ -93,4 +95,28 @@ public class ArmSubsystem {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
+    public void moveUpTicks(double amount) {
+       moveTicks((int)amount);
+    }
+
+    public void moveDownTicks(double amount) {
+        moveTicks(-(int)amount);
+    }
+
+    private void moveTicks(int amount) {
+        int currentPosition = armMotor.getCurrentPosition();
+        int targetPosition = currentPosition + amount;
+
+        if (targetPosition > MAX_POSITION){
+            targetPosition = MAX_POSITION;
+        }
+
+        if (targetPosition < MIN_POSITION){
+            targetPosition = MIN_POSITION;
+        }
+
+        armMotor.setTargetPosition(targetPosition);
+        ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
 }
