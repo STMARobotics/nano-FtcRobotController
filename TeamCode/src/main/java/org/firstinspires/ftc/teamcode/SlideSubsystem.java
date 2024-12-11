@@ -41,17 +41,19 @@ public class SlideSubsystem {
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void changePosition(double positionDelta){
-        this.liftPosition = this.liftPosition + positionDelta;
-        setPosition(this.liftPosition);
+    public void changePosition(float positionDelta){
+        int currentPosition = slideMotor.getCurrentPosition();
+
+        float targetPosition = currentPosition + positionDelta;
+        setPosition(targetPosition);
     }
 
-    public void setPosition(double liftPosition) {
+    public void setPosition(float liftPosition) {
         if (liftPosition > MAX_SLIDE_POSITIONS){
             liftPosition = MAX_SLIDE_POSITIONS;
         }
 
-        if (liftPosition > MIN_SLIDE_POSITION){
+        if (liftPosition < MIN_SLIDE_POSITION){
             liftPosition = MIN_SLIDE_POSITION;
         }
 

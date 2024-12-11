@@ -172,10 +172,10 @@ public class DriveSubsystem {
             telemetry.addData("Strafe", strafe);
             telemetry.addData("Turn", turn);
             telemetry.addData("Reduction Factor", reductionFactor);
-            telemetry.addData("Front Left Power", frontLeftPower);
-            telemetry.addData("Front Right Power", frontRightPower);
-            telemetry.addData("Back Left Power", backLeftPower);
-            telemetry.addData("Back Right Power", backRightPower);
+//            telemetry.addData("Front Left Power", frontLeftPower);
+//            telemetry.addData("Front Right Power", frontRightPower);
+//            telemetry.addData("Back Left Power", backLeftPower);
+//            telemetry.addData("Back Right Power", backRightPower);
 
     }
 
@@ -204,30 +204,14 @@ public class DriveSubsystem {
         telemetry.addData("Strafe", y);
         telemetry.addData("Turn", rx);
         telemetry.addData("Reduction Factor", reductionFactor);
-        telemetry.addData("Front Left Power", frontLeftPower);
-        telemetry.addData("Front Right Power", frontRightPower);
-        telemetry.addData("Back Left Power", backLeftPower);
-        telemetry.addData("Back Right Power", backRightPower);
     }
 
-    public void setPower(float forward, float strafe, float turn, float reductionFactor) {
-        float originalDenominator = calculateDenominator(forward/reductionFactor, strafe/reductionFactor, turn/reductionFactor);
-
-        float adjustedDenominator = originalDenominator * reductionFactor;
-        float frontLeftPower = (forward + strafe + turn) / adjustedDenominator;
-        float backLeftPower = (forward - strafe + turn) / adjustedDenominator;
-        float frontRightPower = (forward - strafe - turn) / adjustedDenominator;
-        float backRightPower = (forward + strafe - turn) / adjustedDenominator;
-
+    public void setPower(float frontRightPower, float frontLeftPower, float backRightPower, float backLeftPower) {
         frontLeftMotor.setPower(frontLeftPower);
         backLeftMotor.setPower(backLeftPower);
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
 
-        telemetry.addData("Forward", forward);
-        telemetry.addData("Strafe", strafe);
-        telemetry.addData("Turn", turn);
-        telemetry.addData("Reduction Factor", reductionFactor);
         telemetry.addData("Front Left Power", frontLeftPower);
         telemetry.addData("Front Right Power", frontRightPower);
         telemetry.addData("Back Left Power", backLeftPower);

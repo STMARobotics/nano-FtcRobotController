@@ -102,9 +102,9 @@ public class MainOpMode extends LinearOpMode {
 //            }
 
             if (gamepad1.dpad_up) {
-                slideSubsystem.changePosition(cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND);
+                slideSubsystem.changePosition((float) (cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND));
             } else if (gamepad1.dpad_down){
-                slideSubsystem.changePosition(-cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND);
+                slideSubsystem.changePosition((float) -cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND);
             } else {
                 slideSubsystem.holdPosition();
             }
