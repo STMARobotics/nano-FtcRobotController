@@ -77,6 +77,9 @@ public class MainOpMode extends LinearOpMode {
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
+
+        boolean armIsHeld = true;
+        boolean slideIsHeld = true;
         while (opModeIsActive()) {
 
             float forward = - gamepad1.left_stick_y;
@@ -88,58 +91,33 @@ public class MainOpMode extends LinearOpMode {
                 reductionFactor = 6;
             }
 
-
-
-    //         Move Slide to positions
-//            if (gamepad1.dpad_up){
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_HIGH_BASKET);
-//            } else if (gamepad1.dpad_down) {
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_COLLAPSED);
-//            } else if (gamepad1.dpad_left){
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SHORT_REACH);
-//            } else if (gamepad1.dpad_right){
-//                slideSubsystem.setPosition(SlideSubsystem.LIFT_SCORING_IN_LOW_BASKET);
-//            }
-
             if (gamepad1.dpad_up) {
+                slideIsHeld = false;
                 slideSubsystem.changePosition((float) (cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND));
             } else if (gamepad1.dpad_down){
+                slideIsHeld = false;
                 slideSubsystem.changePosition((float) -cycleTime * SlideSubsystem.ROTATIONS_PER_SECOND);
-            } else {
+            } else if (!slideIsHeld){
                 slideSubsystem.holdPosition();
+                slideIsHeld = true;
             }
 
-             //Handles move arm to set positions with a fudge factor
-//
-//            Not working but needs to be set to different spot since this may be used
-//            double fudgeFactorPercentage = gamepad2.left_trigger - (gamepad2.right_trigger);
-//            if (gamepad2.a){
-//                arm.moveToBottom(fudgeFactorPercentage);
-//            } else if (gamepad2.b){
-//                arm.moveToParallel(fudgeFactorPercentage);
-//            } else if (gamepad2.y){
-//                arm.moveToTop(fudgeFactorPercentage);
-//            } else if (gamepad2.x){
-//               arm.moveToPickUpSpecimen(fudgeFactorPercentage);
-//            } else if (gamepad2.back) {
-//               arm.resetArmEncoder();
-//            }
-
             if (gamepad2.right_trigger > 0) {
+                armIsHeld = false;
                 arm.moveUpTicks(cycleTime * ArmSubsystem.ROTATIONS_PER_SECOND);
             } else if (gamepad2.left_trigger > 0) {
+                armIsHeld = false;
                 arm.moveDownTicks(cycleTime * ArmSubsystem.ROTATIONS_PER_SECOND);
-            }else {
+            }else if (! armIsHeld){
                 arm.holdPosition();
+                armIsHeld = true;
             }
 
            if (gamepad2.right_bumper){
                 wrist.moveToPosition(.75);
             } else if (gamepad2.left_bumper){
                 wrist.moveToPosition(0);
-            } else {
-               wrist.moveToPosition(.15);
-           }
+            }
 
             if (gamepad2.dpad_left){
                intake.spinForward();
