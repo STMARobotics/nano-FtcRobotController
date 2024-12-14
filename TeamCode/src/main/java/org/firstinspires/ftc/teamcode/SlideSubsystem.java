@@ -14,14 +14,14 @@ public class SlideSubsystem {
     private DcMotor slideMotor;
     public static final String SLIDE_MOTOR="slideMotor";
 
-    public static final double LIFT_TICKS_PER_INCH = 120;
+    public static final int LIFT_TICKS_PER_INCH = 120;
 
-    public static final double LIFT_COLLAPSED = 0 * LIFT_TICKS_PER_INCH;
-    public static final double LIFT_SCORING_IN_LOW_BASKET = 12 * LIFT_TICKS_PER_INCH;
-    public static final double LIFT_SCORING_IN_HIGH_BASKET = 20 * LIFT_TICKS_PER_INCH;
-    public static final double LIFT_SHORT_REACH = 6 * LIFT_TICKS_PER_INCH;
+    public static final int LIFT_COLLAPSED = 0;
+    public static final int LIFT_SCORING_IN_LOW_BASKET = 12 * LIFT_TICKS_PER_INCH;
+    public static final int LIFT_SCORING_IN_HIGH_BASKET = 20 * LIFT_TICKS_PER_INCH;
+    public static final int LIFT_SHORT_REACH = 6 * LIFT_TICKS_PER_INCH;
 
-    public static final int MAX_SLIDE_POSITIONS = 3000;
+    public static final int MAX_SLIDE_POSITIONS = 2950;
     public static final int MIN_SLIDE_POSITION = -250;
 
     double liftPosition = LIFT_COLLAPSED;

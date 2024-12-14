@@ -113,11 +113,13 @@ public class MainOpMode extends LinearOpMode {
                 armIsHeld = true;
             }
 
-           if (gamepad2.right_bumper){
+           if (gamepad2.a){
                 wrist.moveToPosition(.75);
-            } else if (gamepad2.left_bumper){
-                wrist.moveToPosition(0);
-            }
+            } else if (gamepad2.y){
+                wrist.moveToPosition(.2);
+            } else if (gamepad2.x){
+               wrist.moveToPosition(.4);
+           }
 
             if (gamepad2.dpad_left){
                intake.spinForward();

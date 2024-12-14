@@ -84,7 +84,7 @@ public class DriveSubsystem {
     private int newFrontLeftTarget;
     private int newBackRightTarget;
     private int newBackLeftTarget;
-    private IMU imu;
+//    private IMU imu;
 
 
     public DriveSubsystem(HardwareMap hm, Telemetry telemetry) {
@@ -99,7 +99,7 @@ public class DriveSubsystem {
      * All of the hardware devices are accessed via the hardware map, and initialized.
      */
     protected void init(HardwareMap hm) {
-        setupIMU();
+//        setupIMU();
 
         assignMotors();
 
@@ -110,17 +110,17 @@ public class DriveSubsystem {
         driveWithoutEncoders();
     }
 
-    private void setupIMU() {
-        imu = hardwareMap.get(IMU.class, IMU);
-        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-        imu.initialize(parameters);
-    }
+//    private void setupIMU() {
+//        imu = hardwareMap.get(IMU.class, IMU);
+//        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+//                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+//                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
+//        imu.initialize(parameters);
+//    }
 
-    public void resetYaw(){
-        imu.resetYaw();
-    }
+//    public void resetYaw(){
+//        imu.resetYaw();
+//    }
 
     public void driveWithoutEncoders() {
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -179,32 +179,32 @@ public class DriveSubsystem {
 
     }
 
-    public void moveFieldCentric(double x, double y, double rx, float reductionFactor) {
-        double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-
-        // Rotate the movement direction counter to the bot's rotation
-        double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-        double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
-
-        rotX = rotX * 1.1;  // Counteract imperfect strafing
-
-        // Denominator is the largest motor power (absolute value) or 1
-        // This ensures all the powers maintain the same ratio,
-        // but only if at least one is out of the range [-1, 1]
-        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-        denominator *= denominator * reductionFactor;
-        double frontLeftPower = (rotY + rotX + rx) / denominator;
-        double backLeftPower = (rotY - rotX + rx) / denominator;
-        double frontRightPower = (rotY - rotX - rx) / denominator;
-        double backRightPower = (rotY + rotX - rx) / denominator;
-
-        setPower(frontRightPower, frontLeftPower, backRightPower, backLeftPower);
-
-        telemetry.addData("Forward", x);
-        telemetry.addData("Strafe", y);
-        telemetry.addData("Turn", rx);
-        telemetry.addData("Reduction Factor", reductionFactor);
-    }
+//    public void moveFieldCentric(double x, double y, double rx, float reductionFactor) {
+//        double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+//
+//        // Rotate the movement direction counter to the bot's rotation
+//        double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
+//        double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+//
+//        rotX = rotX * 1.1;  // Counteract imperfect strafing
+//
+//        // Denominator is the largest motor power (absolute value) or 1
+//        // This ensures all the powers maintain the same ratio,
+//        // but only if at least one is out of the range [-1, 1]
+//        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
+//        denominator *= denominator * reductionFactor;
+//        double frontLeftPower = (rotY + rotX + rx) / denominator;
+//        double backLeftPower = (rotY - rotX + rx) / denominator;
+//        double frontRightPower = (rotY - rotX - rx) / denominator;
+//        double backRightPower = (rotY + rotX - rx) / denominator;
+//
+//        setPower(frontRightPower, frontLeftPower, backRightPower, backLeftPower);
+//
+//        telemetry.addData("Forward", x);
+//        telemetry.addData("Strafe", y);
+//        telemetry.addData("Turn", rx);
+//        telemetry.addData("Reduction Factor", reductionFactor);
+//    }
 
     public void setPower(float frontRightPower, float frontLeftPower, float backRightPower, float backLeftPower) {
         frontLeftMotor.setPower(frontLeftPower);

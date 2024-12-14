@@ -19,13 +19,14 @@ public class ArmSubsystem {
 
     public static final int ARM_TICKS_PER_DEGREE = 18;
 
-    public static final double ARM_TOP = 90 * ARM_TICKS_PER_DEGREE;
-    public static final double ARM_BOTTOM = 0 * ARM_TICKS_PER_DEGREE;
-    public static final double ARM_PARALLEL = 40 * ARM_TICKS_PER_DEGREE;
-    public static final double ARM_PICKUP = 15* ARM_TICKS_PER_DEGREE;
+    public static final int ARM_TOP = 90 * ARM_TICKS_PER_DEGREE;
+    public static final int ARM_BOTTOM = 0 * ARM_TICKS_PER_DEGREE;
+    public static final int ARM_PARALLEL = 40 * ARM_TICKS_PER_DEGREE;
+    public static final int ARM_PICKUP = 15* ARM_TICKS_PER_DEGREE;
     public static final int MAX_POSITION = 90 * ARM_TICKS_PER_DEGREE;
     public static final int MIN_POSITION = -10 * ARM_TICKS_PER_DEGREE;
-    public static double FUDGE_FACTOR_DEGREES = 15;
+    public static int FUDGE_FACTOR_DEGREES = 15;
+    public static int ARM_SCORE_TOP_BASKET = 1120;
 
     public ArmSubsystem(HardwareMap hm, Telemetry telemetry)    {
         this.hardwareMap = hm;
@@ -46,36 +47,28 @@ public class ArmSubsystem {
         return FUDGE_FACTOR_DEGREES * ARM_TICKS_PER_DEGREE * alteration;
     }
 
-    public void moveToBottom(double alteration){
-        setArmPosition(ARM_BOTTOM + (getAlterationDegrees(alteration)));
+
+    public int getPosition(){
+        return armMotor.getCurrentPosition();
     }
 
-    public void moveToParallel(double alteration){
-        setArmPosition(ARM_PARALLEL + (getAlterationDegrees(alteration)));
-
-    }
-
-    public void moveToPickUpSpecimen(double alteration){
-        setArmPosition(ARM_PICKUP + (getAlterationDegrees(alteration)));
-
-    }
-
-    public void moveToTop(double alteration){
-        setArmPosition(ARM_TOP + (getAlterationDegrees(alteration)));
-
+    public int getTargetPosition(){
+        System.out.println("************************  MODE " + armMotor.getMode());
+        return armMotor.getTargetPosition();
     }
 
     private void setArmPosition(double position) {
-        setArmPosition((int)position);
+        moveToPosition((int)position);
     }
 
-    public void setArmPosition(int position) {
+    public void moveToPosition(int position) {
         armMotor.setTargetPosition(position);
         ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-  }
+    }
+
     public void resetArmEncoder(){
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
 

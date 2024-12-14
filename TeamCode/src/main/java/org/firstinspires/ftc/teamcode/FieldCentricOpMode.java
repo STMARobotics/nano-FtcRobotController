@@ -84,7 +84,7 @@ public class FieldCentricOpMode extends LinearOpMode {
                 reductionFactor = 6;
             }
 
-            driveSubsystem.moveFieldCentric(forward, strafe, turn, reductionFactor);
+//            driveSubsystem.moveFieldCentric(forward, strafe, turn, reductionFactor);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

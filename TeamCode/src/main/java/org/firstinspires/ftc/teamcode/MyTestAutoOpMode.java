@@ -78,25 +78,24 @@ public class MyTestAutoOpMode extends LinearOpMode {
 
         waitForStart();
 
+        armSubsystem.moveUpTicks(ArmSubsystem.ARM_SCORE_TOP_BASKET);
+        while (armSubsystem.isMoving()){
+            System.out.println("***** MOVING" + armSubsystem.getPosition());
+            System.out.println("***** Target" + armSubsystem.getTargetPosition());
+        }
         CommandRunner.OpMode(this)
                 .commands(
-                        Forward(24, .5, 3),
-                        Pause(.25),
-                        TurnLeft(90, 3),
-                        Pause(.25),
-                        Backward(12, .5, 3),
-                        Pause(.25),
-                        TurnRight(45, 3),
-                        MoveArmToPosition(15, 3),
-                        ResetArmPosition(),
-                        MoveSlideToPosition(15, 3)
-//                        Backward(12, .5, 3)
-//                        TurnRight(90, 10)
-//                       StrafeLeft(12, 0.5, 2)
-//                        Backward(12, 2, 4),
-//                        TurnRight(11, 3),
-//                        StrafeRight(6,2,1)
-                ).run();
+//                        Forward(24, .5, 3),
+//                        Pause(.25),
+//                        TurnLeft(90, 3),
+//                        Pause(.25),
+//                        Backward(12, .5, 3),
+//                        Pause(.25),
+//                        TurnRight(45, 3),
+                        MoveArmToPosition(ArmSubsystem.ARM_SCORE_TOP_BASKET, 3),
+//                        ResetArmPosition(),
+                        MoveSlideToPosition(SlideSubsystem.MAX_SLIDE_POSITIONS, 3)
+                ).run(telemetry);
 
 
         telemetry.addData("Path", "Complete");
