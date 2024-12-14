@@ -118,7 +118,7 @@ public class MainOpMode extends LinearOpMode {
             } else if (gamepad2.y){
                 wrist.moveToPosition(.2);
             } else if (gamepad2.x){
-               wrist.moveToPosition(.3);
+               wrist.moveToPosition(.25);
            }
 
             if (gamepad2.dpad_left){
