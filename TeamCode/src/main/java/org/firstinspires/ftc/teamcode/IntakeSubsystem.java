@@ -13,8 +13,8 @@ public class IntakeSubsystem {
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
-    public static final double SERVO_INPUT_SPEED = 0.5;
-    public static final double SERVO_OUTPUT_SPEED = .3;
+    public static final double SERVO_INPUT_SPEED = 0.3;
+    public static final double SERVO_OUTPUT_SPEED = .7;
 
     private CRServo servo;
 
@@ -32,7 +32,7 @@ public class IntakeSubsystem {
 
     public void  spinBackward(){
         servo.setDirection(DcMotorSimple.Direction.REVERSE);
-        servo.setPower(SERVO_INPUT_SPEED);
+        servo.setPower(SERVO_OUTPUT_SPEED);
     }
 
     public void stop(){

@@ -27,6 +27,7 @@ public class ArmSubsystem {
     public static final int MIN_POSITION = -10 * ARM_TICKS_PER_DEGREE;
     public static int FUDGE_FACTOR_DEGREES = 15;
     public static int ARM_SCORE_TOP_BASKET = 1120;
+    public static int ARM_PICK_UP_BLOCK = 220;
 
     public ArmSubsystem(HardwareMap hm, Telemetry telemetry)    {
         this.hardwareMap = hm;

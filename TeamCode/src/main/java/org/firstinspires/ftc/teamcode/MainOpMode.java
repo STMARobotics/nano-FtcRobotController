@@ -102,6 +102,16 @@ public class MainOpMode extends LinearOpMode {
                 slideIsHeld = true;
             }
 
+            if (gamepad2.right_bumper){
+                arm.moveToPosition(1086);
+                slideSubsystem.setPosition(3935);
+                wrist.moveToPosition(.27);
+            } else if (gamepad2.left_bumper){
+                arm.moveToPosition(220);
+                slideSubsystem.setPosition(500);
+                wrist.moveToPosition(.75);
+            }
+
             if (gamepad2.right_trigger > 0) {
                 armIsHeld = false;
                 arm.moveUpTicks(cycleTime * ArmSubsystem.ROTATIONS_PER_SECOND);
@@ -113,7 +123,8 @@ public class MainOpMode extends LinearOpMode {
                 armIsHeld = true;
             }
 
-           if (gamepad2.a){
+
+            if (gamepad2.a){
                 wrist.moveToPosition(.75);
             } else if (gamepad2.y){
                 wrist.moveToPosition(.2);

@@ -9,8 +9,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class SlideSubsystem {
 
-    public static final int SLIDE_VELOCITY = 2100;
-    public static final int ROTATIONS_PER_SECOND = 2800;
+    public static final int SLIDE_VELOCITY = 4000;
+    public static final int ROTATIONS_PER_SECOND = 4000;
     private DcMotor slideMotor;
     public static final String SLIDE_MOTOR="slideMotor";
 
