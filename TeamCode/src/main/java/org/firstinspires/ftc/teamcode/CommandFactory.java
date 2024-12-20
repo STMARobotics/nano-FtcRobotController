@@ -1,21 +1,27 @@
 package org.firstinspires.ftc.teamcode;
 
+import org.firstinspires.ftc.teamcode.IntakeSpinCommand.Direction;
+
 public class CommandFactory {
     private static CommandFactory commandFactory;
     private final DriveSubsystem driveSubsystem;
     private final DistanceSensorSubsystem distanceSensor;
     private final ArmSubsystem arm;
     private final SlideSubsystem slideSubsystem;
+    private final IntakeSubsystem intakeSubsystem;
+    private final WristSubsystem wristSubsystem;
 
-    private CommandFactory(DriveSubsystem driveSubsystem, DistanceSensorSubsystem distanceSensor, ArmSubsystem arm, SlideSubsystem slideSubsystem) {
+    private CommandFactory(DriveSubsystem driveSubsystem, DistanceSensorSubsystem distanceSensor, ArmSubsystem arm, SlideSubsystem slideSubsystem, IntakeSubsystem intakeSubsystem, WristSubsystem wristSubsystem) {
         this.driveSubsystem = driveSubsystem;
         this.distanceSensor = distanceSensor;
         this.arm = arm;
         this.slideSubsystem = slideSubsystem;
+        this.intakeSubsystem = intakeSubsystem;
+        this.wristSubsystem = wristSubsystem;
     }
 
-    public static void InitFactory(DriveSubsystem driveSubSystem, DistanceSensorSubsystem distanceSensor, ArmSubsystem arm, SlideSubsystem slideSubsystem) {
-        commandFactory = new CommandFactory(driveSubSystem, distanceSensor, arm, slideSubsystem);
+    public static void InitFactory(DriveSubsystem driveSubSystem, DistanceSensorSubsystem distanceSensor, ArmSubsystem arm, SlideSubsystem slideSubsystem, IntakeSubsystem intakeSubsystem, WristSubsystem wristSubsystem) {
+        commandFactory = new CommandFactory(driveSubSystem, distanceSensor, arm, slideSubsystem, intakeSubsystem, wristSubsystem);
     }
 
 
@@ -51,8 +57,11 @@ public class CommandFactory {
         return new MoveToPickupCommand(commandFactory.distanceSensor);
     }
 
-    public static Command MoveArmToPosition(int position, int timeout){
-        return new MoveArmToPositionCommand(commandFactory.arm, position, timeout);
+    public static Command MoveArmUpTicks(int ticksUp, int timeout){
+        return new MoveArmUpTicksCommand(commandFactory.arm, ticksUp, timeout);
+    }
+    public static Command MoveArmDownTicks(int ticksDown, int timeout){
+        return new MoveArmUpTicksCommand(commandFactory.arm, -ticksDown, timeout);
     }
 
     public static Command ResetArmPosition(){
@@ -61,5 +70,19 @@ public class CommandFactory {
 
     public static Command MoveSlideToPosition(int position, int timeout){
         return new SlideToPositionCommand(commandFactory.slideSubsystem, position, timeout);
+    }
+
+    public static Command EjectSample(int timeout){
+        return new IntakeSpinCommand(commandFactory.intakeSubsystem, Direction.FORWARD, timeout);
+    }
+
+    public static Command LoadSample(int timeout){
+        return new IntakeSpinCommand(commandFactory.intakeSubsystem,Direction.BACKWARD,timeout);
+    }
+    public static Command WristPickUp(int timeout){
+        return new MoveWristToPositionCommand(commandFactory.wristSubsystem, WristSubsystem.PICKUP_POSITION,timeout);
+    }
+    public static Command WristDropOff(int position, int timeout){
+        return new MoveWristToPositionCommand(commandFactory.wristSubsystem,  WristSubsystem.DROP_OFF_POSITION,timeout);
     }
 }

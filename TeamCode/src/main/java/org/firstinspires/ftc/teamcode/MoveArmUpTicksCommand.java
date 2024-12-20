@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
-public class MoveArmToPositionCommand implements Command{
-    private ArmSubsystem armSystem;
-    private int timeout;
-    private int position;
+public class MoveArmUpTicksCommand implements Command{
+    private final ArmSubsystem armSystem;
+    private final int timeout;
+    private final int ticks;
 
 
-    public MoveArmToPositionCommand(ArmSubsystem armSystem, int position, int timeout) {
+    public MoveArmUpTicksCommand(ArmSubsystem armSystem, int ticks, int timeout) {
         this.armSystem = armSystem;
-        this.position = position;
+        this.ticks = ticks;
         this.timeout = timeout;
     }
 
@@ -39,7 +39,7 @@ public class MoveArmToPositionCommand implements Command{
     @Override
     public void execute() {
         System.out.println("******************************  EXECUTING ARM " + armSystem.isMoving());
-        armSystem.moveToPosition(position);
+        armSystem.moveUpTicks(ticks);
     }
 
     @Override

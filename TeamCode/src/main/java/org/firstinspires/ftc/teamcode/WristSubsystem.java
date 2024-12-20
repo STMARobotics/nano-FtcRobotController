@@ -7,6 +7,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class WristSubsystem {
     public static final String WRIST_SERVO = "wrist-servo";
+    public static final double PICKUP_POSITION = .75;
+    public static final double DROP_OFF_POSITION = .27;
+    public static final double REST_POSITION = .2;
+
 
     private HardwareMap hardwareMap;
     private Telemetry telemetry;

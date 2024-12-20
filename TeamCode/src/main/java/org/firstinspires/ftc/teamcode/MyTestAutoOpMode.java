@@ -63,43 +63,89 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous(name="Robot: Auto Drive By Encoder", group="Robot")
 //@Disabled
 public class MyTestAutoOpMode extends LinearOpMode {
-    private DriveSubsystem driveSubSystem;
-    private DistanceSensorSubsystem distanceSensor;
-    private ArmSubsystem armSubsystem;
-    private SlideSubsystem slideSubsystem;
+
     @Override
     public void runOpMode() {
 
-        driveSubSystem = new DriveSubsystem(hardwareMap, telemetry);
-        distanceSensor = new DistanceSensorSubsystem(hardwareMap, telemetry);
-        armSubsystem =  new ArmSubsystem(hardwareMap, telemetry);
-        slideSubsystem = new SlideSubsystem(hardwareMap,telemetry);
-        CommandFactory.InitFactory(driveSubSystem, distanceSensor, armSubsystem,slideSubsystem);
+        DriveSubsystem driveSubSystem = new DriveSubsystem(hardwareMap, telemetry);
+        DistanceSensorSubsystem distanceSensor = new DistanceSensorSubsystem(hardwareMap, telemetry);
+        ArmSubsystem armSubsystem = new ArmSubsystem(hardwareMap, telemetry);
+        SlideSubsystem slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
+        IntakeSubsystem intakeSubsystem = new IntakeSubsystem(hardwareMap, telemetry);
+        WristSubsystem wristSubsystem = new WristSubsystem(hardwareMap, telemetry);
 
+
+        CommandFactory.InitFactory(driveSubSystem, distanceSensor, armSubsystem, slideSubsystem, intakeSubsystem,wristSubsystem);
         waitForStart();
 
-        armSubsystem.moveUpTicks(ArmSubsystem.ARM_SCORE_TOP_BASKET);
-        while (armSubsystem.isMoving()){
-            System.out.println("***** MOVING" + armSubsystem.getPosition());
-            System.out.println("***** Target" + armSubsystem.getTargetPosition());
-        }
         CommandRunner.OpMode(this)
                 .commands(
-//                        Forward(24, .5, 3),
-//                        Pause(.25),
-//                        TurnLeft(90, 3),
-//                        Pause(.25),
-//                        Backward(12, .5, 3),
+                        Forward(24, .5, 3),
+                        Pause(.25),
+                        TurnLeft(90, 3),
+
+//                         MoveArmToPosition(1086, 3)
+//                       (For when we fix the robot we can use this auto)
+//                        Pause(.25)
+//
+                        MoveArmUpTicks(1086, 3)
+
 //                        Pause(.25),
 //                        TurnRight(45, 3),
-                        MoveArmToPosition(ArmSubsystem.ARM_SCORE_TOP_BASKET, 3),
+//                        MoveArmToPosition(ArmSubsystem.ARM_SCORE_TOP_BASKET, 3),
 //                        ResetArmPosition(),
-                        MoveSlideToPosition(SlideSubsystem.MAX_SLIDE_POSITIONS, 3)
+//                        MoveSlideToPosition(SlideSubsystem.MAX_SLIDE_POSITIONS, 3)
                 ).run(telemetry);
 
-
+//        buildCommand().run(telemetry);
         telemetry.addData("Path", "Complete");
         telemetry.update();
         sleep(1000);  // pause to display final telemetry message.
+    }
+
+    private CommandRunner buildCommand(){
+        return CommandRunner.OpMode(this).commands(
+                        Backward(31, .5, 3),
+                        Pause(.25),Pause(.25),
+                        Forward(2, 0.5, 3),
+                        Pause(.25),
+                        StrafeLeft(35, .5, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(220, 3),
+
+                        Pause(.25),
+                        StrafeRight(35, 0.5, 3),
+                        Pause(.25),
+                        Backward(2, 0.5, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(1086, 3),
+
+                        Pause(.25),
+                        StrafeLeft(35, 0.5, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(220, 3),
+
+                        Pause(.25),
+                        StrafeRight(35, 0.5, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(1086, 3),
+
+                        Pause(.25),
+                        Backward(2, 0.5, 3),
+                        Pause(.25),
+                        StrafeLeft(35, 0.5, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(220, 3),
+
+                        Pause(.25),
+                        Forward(2, 0.5, 3),
+                        Pause(.25),
+                        StrafeRight(35, 0.5, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(1086, 3),
+
+                        Pause(.25),
+                        Forward(110, 0.5, 3)
+        );
     }
 }

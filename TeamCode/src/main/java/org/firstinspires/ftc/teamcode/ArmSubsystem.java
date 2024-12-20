@@ -40,7 +40,6 @@ public class ArmSubsystem {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 

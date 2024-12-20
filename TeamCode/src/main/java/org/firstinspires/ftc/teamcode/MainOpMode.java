@@ -105,11 +105,11 @@ public class MainOpMode extends LinearOpMode {
             if (gamepad2.right_bumper){
                 arm.moveToPosition(1086);
                 slideSubsystem.setPosition(3935);
-                wrist.moveToPosition(.27);
+                wrist.moveToPosition(WristSubsystem.DROP_OFF_POSITION);
             } else if (gamepad2.left_bumper){
                 arm.moveToPosition(220);
                 slideSubsystem.setPosition(500);
-                wrist.moveToPosition(.75);
+                wrist.moveToPosition(WristSubsystem.PICKUP_POSITION);
             }
 
             if (gamepad2.right_trigger > 0) {
