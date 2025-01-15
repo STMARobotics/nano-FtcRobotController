@@ -53,7 +53,7 @@ public class ArmSubsystem {
     }
 
     public int getTargetPosition(){
-        System.out.println("************************  MODE " + armMotor.getMode());
+        System.out.println("************************  ARM MODE " + armMotor.getMode());
         return armMotor.getTargetPosition();
     }
 
@@ -75,6 +75,8 @@ public class ArmSubsystem {
     public void addTelemetry(){
         telemetry.addData("arm position",armMotor.getCurrentPosition());
         telemetry.addData("arm busy", armMotor.isBusy());
+        System.out.println("*************** ARM POWER " + armMotor.getPower());
+        System.out.println("*************** ARM VELOCITY " +  ((DcMotorEx) armMotor).getVelocity());
     }
 
     public boolean isMoving(){
@@ -84,7 +86,8 @@ public class ArmSubsystem {
     public void holdPosition(){
         int currentPosition = armMotor.getCurrentPosition();
         armMotor.setTargetPosition(currentPosition);
-        ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
+//        ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
+        armMotor.setPower(.5);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -109,7 +112,8 @@ public class ArmSubsystem {
         }
 
         armMotor.setTargetPosition(targetPosition);
-        ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
+//        ((DcMotorEx) armMotor).setVelocity(ARM_SPEED);
+        armMotor.setPower(.5);
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

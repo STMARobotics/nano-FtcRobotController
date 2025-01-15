@@ -73,22 +73,227 @@ public class MyTestAutoOpMode extends LinearOpMode {
         SlideSubsystem slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
         IntakeSubsystem intakeSubsystem = new IntakeSubsystem(hardwareMap, telemetry);
         WristSubsystem wristSubsystem = new WristSubsystem(hardwareMap, telemetry);
+        CommandFactory.InitFactory(driveSubSystem, distanceSensor, armSubsystem, slideSubsystem, intakeSubsystem, wristSubsystem);
 
-
-        CommandFactory.InitFactory(driveSubSystem, distanceSensor, armSubsystem, slideSubsystem, intakeSubsystem,wristSubsystem);
         waitForStart();
 
         CommandRunner.OpMode(this)
                 .commands(
-                        Forward(24, .5, 3),
+                        Backward(17, .5, 3),
+                        Pause(.25),Pause(.25),
+                        Forward(1, 0.5, 3),
                         Pause(.25),
-                        TurnLeft(90, 3),
+                        Pause(.25),
 
-//                         MoveArmToPosition(1086, 3)
+                        //place first block
+                        MoveArmUpTicks(1082, 3),
+                        Pause(.25),
+                        MoveSlideToPosition(2900,3),
+                        Pause(.25),
+                        WristDropOff(38,3),
+                        Pause(.25),
+//                        Backward(1,0.5,3),
+                        EjectSample(3),
+                        Pause(.50),
+                        IntakeStop(3),
+//
+
+                        MoveArmDownTicks(100,3),
+                        MoveSlideToPosition(30,3),
+                        MoveArmDownTicks(2000, 3),
+
+                        StrafeLeft(35, .25, 3),
+                        Pause(.25),
+                        MoveArmUpTicks(220, 3)
+//
+////                        pick up new block
+//                        Pause(.25),
+//                        StrafeRight(-35, 0.5, 3),
+//                        Pause(.25),
+//                        Backward(2, 0.5, 3),
+//                        Pause(.25),
+//
+//                        Pause(.25),
+//                        MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        Pause(.25),
+//                        StrafeLeft(-35, 0.5, 3),
+//                        Pause(.25),
+//                        MoveArmUpTicks(220, 3),
+//
+//                        Pause(.25),
+//                        StrafeRight(-35, 0.5, 3),
+//                        Pause(.25),
+//
+//                        Pause(.25),
+//                        MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        Pause(.25),
+//                        Backward(2, 0.5, 3),
+//                        Pause(.25),
+//                        StrafeLeft(-35, 0.5, 3),
+//                        Pause(.25),
+//                        MoveArmUpTicks(220, 3),
+//
+//                        Pause(.25),
+//                        Forward(2, 0.5, 3),
+//                        Pause(.25),
+//                        StrafeRight(-35, 0.5, 3),
+//                        Pause(.25),
+//
+//                        Pause(.25),
+//                        MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        Pause(.25),
+//                        Forward(110, 0.5, 3)
+
+                        //Go to position
+//                        Backward(31, .5, 3),
+//                        Pause(.25),Pause(.25),
+//                        Forward(2, 0.5, 3),
+//                        Pause(.25),
+//                        Pause(.25),
+//
+//                         //place first block
+//                         MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        StrafeLeft(35, .5, 3),
+//                        Pause(.25),
+//                        MoveArmUpTicks(220, 3),
+//
+//                        pick up new block
+//                        Pause(.25),
+//                        StrafeRight(35, 0.5, 3),
+//                        Pause(.25),
+//                        Backward(2, 0.5, 3),
+//                        Pause(.25),
+//
+//                        Pause(.25),
+//                         MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        Pause(.25),
+//                        StrafeLeft(35, 0.5, 3),
+//                        Pause(.25),
+//                        MoveArmUpTicks(220, 3),
+//
+//                        Pause(.25),
+//                        StrafeRight(35, 0.5, 3),
+//                        Pause(.25),
+//
+//                        Pause(.25),
+//                         MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        Pause(.25),
+//                        Backward(2, 0.5, 3),
+//                        Pause(.25),
+//                        StrafeLeft(35, 0.5, 3),
+//                        Pause(.25),
+//                        MoveArmUpTicks(220, 3),
+//
+//                        Pause(.25),
+//                        Forward(2, 0.5, 3),
+//                        Pause(.25),
+//                        StrafeRight(35, 0.5, 3),
+//                        Pause(.25),
+//
+//                        Pause(.25),
+//                         MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//
+//                        Pause(.25),
+//                        Forward(110, 0.5, 3)
+
+
+
+
+
+
+////                        Forward(12, .25, 3)
+////                        Pause(.25),
+////                        TurnRight(90, 3),
+//                        Pause(.25),
+//                         MoveArmUpTicks(1082, 3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(2222,3),
+//                        Pause(.25),
+//                        Pause(.25),
+//                        WristDropOff(38,3),
+//                        Pause(.25),
+//                        EjectSample(3),
+//                        Pause(1),
+//                        IntakeStop(3),
+//                        Pause(.25),
+//                        MoveSlideToPosition(30,3),
+//                        Pause(.25),
+//                        MoveArmDownTicks(250, 3),
+//                        Pause(.25)
+
+
 //                       (For when we fix the robot we can use this auto)
 //                        Pause(.25)
 //
-                        MoveArmUpTicks(1086, 3)
+
 
 //                        Pause(.25),
 //                        TurnRight(45, 3),

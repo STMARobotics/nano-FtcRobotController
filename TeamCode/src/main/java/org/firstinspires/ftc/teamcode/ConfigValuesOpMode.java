@@ -57,8 +57,8 @@ public class ConfigValuesOpMode extends LinearOpMode {
     SlideSubsystem slideSubsystem;
     ArmSubsystem arm;
     DistanceSensorSubsystem distanceSensorSubsystem;
-//    WristSubsystem wrist;
-//    IntakeSubsystem intake;
+    WristSubsystem wrist;
+    IntakeSubsystem intake;
 
 
     int forwardAmount = 12;
@@ -83,7 +83,7 @@ public class ConfigValuesOpMode extends LinearOpMode {
         slideSubsystem = new SlideSubsystem(hardwareMap, telemetry);
         arm = new ArmSubsystem(hardwareMap, telemetry);
         distanceSensorSubsystem = new DistanceSensorSubsystem(hardwareMap,telemetry);
-        CommandFactory.InitFactory(driveSubsystem, distanceSensorSubsystem, arm, slideSubsystem );
+        CommandFactory.InitFactory(driveSubsystem, distanceSensorSubsystem, arm, slideSubsystem, intake, wrist );
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();

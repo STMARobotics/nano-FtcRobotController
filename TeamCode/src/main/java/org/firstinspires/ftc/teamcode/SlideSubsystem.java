@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class SlideSubsystem {
 
-    public static final int SLIDE_VELOCITY = 4000;
+    public static final double SLIDE_POWER = 0.5;
     public static final int ROTATIONS_PER_SECOND = 4000;
     private DcMotor slideMotor;
     public static final String SLIDE_MOTOR="slideMotor";
@@ -58,7 +58,7 @@ public class SlideSubsystem {
         }
 
         slideMotor.setTargetPosition((int) (liftPosition));
-        ((DcMotorEx) slideMotor).setVelocity(SLIDE_VELOCITY);
+        slideMotor.setPower(SLIDE_POWER);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 

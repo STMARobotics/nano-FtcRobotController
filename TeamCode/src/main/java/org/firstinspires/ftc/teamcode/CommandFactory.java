@@ -79,6 +79,10 @@ public class CommandFactory {
     public static Command LoadSample(int timeout){
         return new IntakeSpinCommand(commandFactory.intakeSubsystem,Direction.BACKWARD,timeout);
     }
+
+    public static Command IntakeStop(int timout ){
+        return new IntakeStopCommand(commandFactory.intakeSubsystem,3);
+    }
     public static Command WristPickUp(int timeout){
         return new MoveWristToPositionCommand(commandFactory.wristSubsystem, WristSubsystem.PICKUP_POSITION,timeout);
     }

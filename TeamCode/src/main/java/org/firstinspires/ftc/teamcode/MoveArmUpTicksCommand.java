@@ -14,7 +14,7 @@ public class MoveArmUpTicksCommand implements Command{
 
     @Override
     public boolean isFinished() {
-        System.out.println("******************************  checking moving " + armSystem.isMoving());
+        System.out.println("******************************  ARM checking moving " + armSystem.isMoving());
         System.out.println("******************************  ARM POSITION " + armSystem.getPosition());
         System.out.println("******************************  ARM TARGET " + armSystem.getTargetPosition());
         return !armSystem.isMoving();
@@ -27,7 +27,7 @@ public class MoveArmUpTicksCommand implements Command{
 
     @Override
     public void onComplete() {
-        System.out.println("*****************  COMPLETE ************");
+        System.out.println("*****************  ARM COMPLETE ************");
         armSystem.holdPosition();
     }
 
@@ -40,6 +40,7 @@ public class MoveArmUpTicksCommand implements Command{
     public void execute() {
         System.out.println("******************************  EXECUTING ARM " + armSystem.isMoving());
         armSystem.moveUpTicks(ticks);
+//        armSystem.moveUpTicks(300);
     }
 
     @Override
