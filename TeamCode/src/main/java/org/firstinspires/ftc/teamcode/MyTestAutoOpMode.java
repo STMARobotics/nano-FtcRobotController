@@ -99,12 +99,18 @@ public class MyTestAutoOpMode extends LinearOpMode {
 //
 
                         MoveArmDownTicks(100,3),
-                        MoveSlideToPosition(30,3),
-                        MoveArmDownTicks(2000, 3),
-
-                        StrafeLeft(35, .25, 3),
                         Pause(.25),
-                        MoveArmUpTicks(220, 3)
+                        MoveSlideToPosition(30,3),
+                        Pause(.25),
+                        MoveArmDownTicks(2000, 3),
+                        Pause(.25),
+
+                        Forward(65,0.5, 3)
+
+
+//                        StrafeLeft(35, .25, 3),
+//                        Pause(.25),
+//                        MoveArmUpTicks(220, 3)
 //
 ////                        pick up new block
 //                        Pause(.25),
