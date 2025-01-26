@@ -14,7 +14,7 @@ public class IntakeSubsystem {
     private Telemetry telemetry;
 
     public static final double SERVO_INPUT_SPEED = 0.3;
-    public static final double SERVO_OUTPUT_SPEED = .7;
+    public static final double SERVO_OUTPUT_SPEED = .8;
 
     private CRServo servo;
 

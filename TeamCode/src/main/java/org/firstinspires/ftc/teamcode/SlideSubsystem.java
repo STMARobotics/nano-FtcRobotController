@@ -21,7 +21,7 @@ public class SlideSubsystem {
     public static final int LIFT_SCORING_IN_HIGH_BASKET = 20 * LIFT_TICKS_PER_INCH;
     public static final int LIFT_SHORT_REACH = 6 * LIFT_TICKS_PER_INCH;
 
-    public static final int MAX_SLIDE_POSITIONS = 2950;
+    public static final int MAX_SLIDE_POSITIONS = 2500;
     public static final int MIN_SLIDE_POSITION = -250;
 
     double liftPosition = LIFT_COLLAPSED;

@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class WristSubsystem {
     public static final String WRIST_SERVO = "wrist-servo";
     public static final double PICKUP_POSITION = .85;
-    public static final double DROP_OFF_POSITION = .38;
+    public static final double DROP_OFF_POSITION = .65;
     public static final double REST_POSITION = .2;
 
 
@@ -22,6 +22,7 @@ public class WristSubsystem {
         this.telemetry = telemetry;
 
         servo = hardwareMap.get(Servo.class, WRIST_SERVO);
+        servo.setDirection(Servo.Direction.REVERSE);
     }
 
     public void moveToPosition(double position){
